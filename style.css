@@ -10,10 +10,12 @@ body {
     color: #333;
     background-color: #fff;
     padding: 0;
+    overflow-x: hidden;
 }
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 /* Navigation */
@@ -845,6 +847,26 @@ blockquote {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
+
+    /* Force single column on mobile for grids with inline styles */
+    .impact-metrics,
+    .two-column-grid,
+    .four-level-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Prevent horizontal overflow on small screens */
+    .case-study-section,
+    .container {
+        overflow-x: hidden;
+    }
+
+    /* Ensure images don't cause overflow */
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 .full-bleed-image {
@@ -1064,7 +1086,7 @@ h2 {
 
     .two-column-grid,
     .four-level-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .scenario-cards {
@@ -1073,6 +1095,12 @@ h2 {
 
     .hero-image-full-bleed img {
         max-width: 85%;
+    }
+
+    /* Prevent horizontal overflow */
+    .case-study-section,
+    .container {
+        overflow-x: hidden;
     }
 }
 
