@@ -1075,8 +1075,9 @@ h2 {
     }
 
     .social-links {
-        flex-direction: column;
-        gap: 0.75rem;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: flex-start;
     }
 
     .home-layout {
