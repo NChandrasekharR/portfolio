@@ -725,6 +725,17 @@ blockquote {
     object-fit: cover;
 }
 
+/* Mobile-only hero header */
+.mobile-hero-header {
+    display: none;
+}
+
+.mobile-hero-header img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Scroll indicator */
 .scroll-indicator {
     margin-top: 3rem;
@@ -797,13 +808,13 @@ blockquote {
     }
 
     .hero-split-right {
-        order: 1;
-        min-height: 40vh;
+        display: none;
     }
 
-    .hero-split-right img {
-        object-fit: contain;
-        padding: 2rem;
+    .mobile-hero-header {
+        display: block;
+        order: 1;
+        width: 100%;
     }
 }
 
@@ -821,7 +832,13 @@ blockquote {
     }
 
     .hero-split-right {
-        min-height: 30vh;
+        display: none;
+    }
+
+    .mobile-hero-header {
+        display: block;
+        order: 0;
+        width: 100%;
     }
 
     .hero-meta {
