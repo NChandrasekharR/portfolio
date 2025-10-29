@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing.html">Writing</a></li>
+            <li><a href="talks-workshops.html">Talks</a></li>
+            <li><a href="in-the-news.html">In the News</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html" class="active">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Resume</h1>
+            <p>Experience and skills</p>
+        </section>
+
+        <section class="about-content">
+            <div class="about-section">
+                <h2>Experience</h2>
+                <div class="resume-item">
+                    <h3>Job Title - Company Name</h3>
+                    <p class="resume-meta">Year - Year</p>
+                    <p>Brief description of role and achievements</p>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Education</h2>
+                <div class="resume-item">
+                    <h3>Degree - Institution</h3>
+                    <p class="resume-meta">Year</p>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Skills</h2>
+                <p>List of your key skills and tools</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

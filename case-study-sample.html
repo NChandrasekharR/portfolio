@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html" class="active">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing.html">Writing</a></li>
+            <li><a href="talks-workshops.html">Talks</a></li>
+            <li><a href="in-the-news.html">In the News</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+
+    <!-- Floating Navigation -->
+    <aside class="floating-nav">
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#learnings">Learnings</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="container case-study">
+        <!-- Back Link -->
+        <div class="back-link">
+            <a href="work.html">← Back to Work</a>
+        </div>
+
+        <!-- Header -->
+        <section class="case-study-header">
+            <h1>Project Title</h1>
+            <p class="case-study-subtitle">Brief tagline about what this project accomplished</p>
+
+            <div class="case-study-meta">
+                <div class="meta-item">
+                    <h4>Role</h4>
+                    <p>Product Designer</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Timeline</h4>
+                    <p>6 months</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Team</h4>
+                    <p>2 designers, 3 engineers</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Image -->
+        <section class="case-study-image">
+            <img src="https://via.placeholder.com/1200x600/B43546/FFFFFF?text=Hero+Image" alt="Project hero image">
+        </section>
+
+        <!-- Overview -->
+        <section id="overview" class="case-study-section">
+            <h2>Overview</h2>
+            <p>Brief overview of the project, the problem space, and your approach. Keep it concise and engaging.</p>
+        </section>
+
+        <!-- Problem -->
+        <section id="problem" class="case-study-section">
+            <h2>The Problem</h2>
+            <p>Describe the problem you were solving. What pain points did users face? What was the business challenge?</p>
+        </section>
+
+        <!-- Image Placeholder -->
+        <section class="case-study-image">
+            <img src="https://via.placeholder.com/1200x600/B43546/FFFFFF?text=Problem+Research" alt="Research findings">
+            <p class="image-caption">Caption describing what this image shows</p>
+        </section>
+
+        <!-- Research -->
+        <section id="research" class="case-study-section">
+            <h2>Research & Discovery</h2>
+            <p>What research did you conduct? User interviews? Data analysis? Competitive analysis?</p>
+            <ul>
+                <li>Research method 1 and key findings</li>
+                <li>Research method 2 and key findings</li>
+                <li>Research method 3 and key findings</li>
+            </ul>
+        </section>
+
+        <!-- Image Placeholder -->
+        <section class="case-study-image">
+            <img src="https://via.placeholder.com/1200x600/B43546/FFFFFF?text=Design+Process" alt="Design process">
+            <p class="image-caption">Caption describing your design process</p>
+        </section>
+
+        <!-- Solution -->
+        <section id="solution" class="case-study-section">
+            <h2>The Solution</h2>
+            <p>Describe your design solution. What did you build? How did it address the problem?</p>
+        </section>
+
+        <!-- Image Placeholder -->
+        <section class="case-study-image">
+            <img src="https://via.placeholder.com/1200x600/B43546/FFFFFF?text=Final+Design" alt="Final design">
+            <p class="image-caption">The final design solution</p>
+        </section>
+
+        <!-- Impact -->
+        <section id="impact" class="case-study-section">
+            <h2>Impact & Results</h2>
+            <p>What was the outcome? Share metrics, user feedback, or business impact.</p>
+            <div class="impact-metrics">
+                <div class="metric">
+                    <h3>50%</h3>
+                    <p>Increase in user engagement</p>
+                </div>
+                <div class="metric">
+                    <h3>2x</h3>
+                    <p>Faster task completion</p>
+                </div>
+                <div class="metric">
+                    <h3>95%</h3>
+                    <p>User satisfaction score</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learnings -->
+        <section id="learnings" class="case-study-section">
+            <h2>Key Learnings</h2>
+            <p>What did you learn from this project? What would you do differently?</p>
+        </section>
+
+        <!-- Navigation -->
+        <section class="case-study-nav">
+            <a href="work.html" class="nav-button">← Back to Work</a>
+            <a href="case-study-sample.html" class="nav-button">Next Project →</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Floating nav active state tracking
+        const sections = document.querySelectorAll('.case-study-section');
+        const floatingNavLinks = document.querySelectorAll('.floating-nav a');
+
+        function updateActiveNavLink() {
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Check if section is in viewport (with some offset for better UX)
+                if (window.scrollY >= sectionTop - 150) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            floatingNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        // Update on load
+        updateActiveNavLink();
+    </script>
+</body>
+</html>

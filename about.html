@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing.html">Writing</a></li>
+            <li><a href="talks-workshops.html">Talks</a></li>
+            <li><a href="in-the-news.html">In the News</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>About</h1>
+            <p>A bit more about me</p>
+        </section>
+
+        <section class="about-content">
+            <div class="about-section">
+                <h2>Hi, I'm Chandra</h2>
+                <p>I'm a product builder, who loves designing with data, experiments & prototypes.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>My design career so far</h2>
+
+                <h3>Quizizz (2024 - Present)</h3>
+                <p>I work on AI & enterprise products for schools and districts at Quizizz. I build tools that empower teachers to deliver the best experience for their students in the classroom.</p>
+
+                <h3>Gojek (2021 - 2024)</h3>
+                <p>I collaborated with business, product & engineering teams to experiment + roll out new ad experiences on the Gojek consumer app that have driven $5m USD in additional revenue till date, while keeping UX at the forefront.</p>
+
+                <h3>Pause (2020 - 2021)</h3>
+                <p>Pause is a Leave Management System software for small businesses developed by Obvious. I helped design the alpha web app, then helped on UX research and customer ops.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>How I work</h2>
+
+                <h3>Experiment-first mindset</h3>
+                <p>As a designer I form hypotheses, test them systematically, and make decisions based on evidence rather than assumptions.</p>
+
+                <h3>Make allies and build together</h3>
+                <p>Design doesn't happen only in Figma. Work with partners via workshops, napkin sketches, & even corridor chats to get alignment.</p>
+
+                <h3>Pragmatic design decisions</h3>
+                <p>I spend lots of time to deeply understand systems, tech and business so that we can build something realistic that works for everyone.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Outside of work</h2>
+                <p>When I'm not designing, you can find me exploring new places, trying out new recipes, or diving into a good book.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
