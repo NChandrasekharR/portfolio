@@ -5,6 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Chandra Ramanujan</title>
+    <meta name="description" content="Product designer with 5+ years experience building with data, experiments & prototypes. Lead Designer at Sitetracker. Previously Gojek ($5M revenue impact) and Wayground.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Chandra Ramanujan",
+        "jobTitle": "Lead Designer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Sitetracker"
+        },
+        "description": "Product designer with 5+ years experience. Led design on ads products driving $5M revenue at Gojek. Shipped growth experiments with 60% CTR improvement. Built scalable design systems reducing launch time from weeks to days.",
+        "url": "https://chandraramanujan.com",
+        "email": "attnchand@gmail.com",
+        "sameAs": [
+            "https://www.linkedin.com/in/chandrasekharn/",
+            "https://twitter.com/NCResq",
+            "https://github.com/NChandrasekharR",
+            "https://dribbble.com/NCResq/shots",
+            "https://medium.com/@NCResq"
+        ],
+        "knowsAbout": [
+            "Product Design",
+            "Growth Experiments",
+            "Design Systems",
+            "Ads Products",
+            "Enterprise Software",
+            "EdTech",
+            "Data-Driven Design",
+            "Prototyping"
+        ],
+        "alumniOf": [
+            {
+                "@type": "Organization",
+                "name": "Gojek",
+                "description": "Designed and shipped ad experiences driving $5M in additional revenue. Led experiments achieving 60% increase in ad CTR."
+            },
+            {
+                "@type": "Organization",
+                "name": "Wayground",
+                "description": "Drove growth experiments delivering 5+ percentage point increase in signups. Designed enterprise features unlocking $250K+ in sales."
+            },
+            {
+                "@type": "Organization",
+                "name": "Pause (by Obvious)",
+                "description": "Led product from zero to $10K ARR while in beta."
+            }
+        ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
@@ -16,32 +66,54 @@
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
             padding-bottom: 3rem;
             border-bottom: 1px solid #eee;
             margin-bottom: 4rem;
         }
 
-        .about-hero-content h1 {
-            font-size: 48pt;
-            font-weight: 700;
-            color: #000;
-            margin-bottom: 1rem;
-            line-height: 1.1;
+        .about-hero-content .page-header {
+            margin-bottom: 0;
         }
 
         .about-hero-content .tagline {
-            font-size: 20pt;
+            font-size: 18pt;
             color: #666;
-            line-height: 1.5;
+            line-height: 1.6;
             max-width: 540px;
+            margin-top: 1.5rem;
         }
 
-        .about-hero-image img {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
+        /* Polaroid style */
+        .polaroid {
+            position: relative;
+            background: #fff;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transform: rotate(3deg);
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg);
+        }
+
+        .polaroid img {
+            width: 240px;
+            height: 240px;
             object-fit: cover;
+            display: block;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 14pt;
+            color: #666;
+            font-style: italic;
         }
 
         /* Career Timeline */
@@ -111,7 +183,7 @@
 
         .timeline-title {
             font-size: 22pt;
-            font-weight: 700;
+            font-weight: 600;
             color: #000;
             margin-bottom: 0.5rem;
         }
@@ -182,16 +254,12 @@
             line-height: 1.6;
         }
 
-        /* Quick Facts / Sidebar */
-        .about-details {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
+        /* Outside Work */
+        .outside-work-section {
+            margin-bottom: 3rem;
         }
 
-        .outside-work h2,
-        .quick-facts h2 {
+        .outside-work-section h2 {
             font-size: 14pt;
             font-weight: 600;
             color: #999;
@@ -200,18 +268,10 @@
             margin-bottom: 1.5rem;
         }
 
-        .outside-work p {
-            font-size: 16pt;
-            color: #666;
-            line-height: 1.7;
-            max-width: 500px;
-        }
-
         .interests-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
-            margin-top: 1.5rem;
         }
 
         .interest-tag {
@@ -228,38 +288,6 @@
         .interest-tag:hover {
             border-color: #B43546;
             color: #B43546;
-        }
-
-        .quick-facts-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .quick-facts-list li {
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .quick-facts-list li:last-child {
-            border-bottom: none;
-        }
-
-        .fact-label {
-            font-size: 12pt;
-            font-weight: 600;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .fact-value {
-            font-size: 16pt;
-            color: #333;
-            font-weight: 500;
         }
 
         /* Connect Section */
@@ -303,11 +331,6 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .about-details {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
             .philosophy-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -325,13 +348,22 @@
                 order: -1;
             }
 
-            .about-hero-image img {
-                width: 200px;
-                height: 200px;
+            .polaroid {
+                transform: rotate(2deg);
+            }
+
+            .polaroid img {
+                width: 180px;
+                height: 180px;
             }
 
             .about-hero-content .tagline {
                 max-width: 100%;
+                text-align: left;
+            }
+
+            .about-hero-content .page-header {
+                text-align: left;
             }
 
             .connect-content {
@@ -379,9 +411,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="work.html">Work</a></li>
             <li><a href="side-projects.html">Side Projects</a></li>
-            <li><a href="writing.html">Writing</a></li>
-            <li><a href="talks-workshops.html">Talks</a></li>
-            <li><a href="in-the-news.html">In the News</a></li>
+            <li><a href="writing-speaking.html">Writing & Speaking</a></li>
             <li><a href="about.html" class="active">About</a></li>
             <li><a href="resume.html">Resume</a></li>
         </ul>
@@ -391,12 +421,18 @@
         <!-- Hero Section -->
         <section class="about-hero">
             <div class="about-hero-content">
-                <h1>Hi, I'm Chandra.</h1>
-                <p class="tagline">I'm a product builder who loves designing with data, experiments, and lots of
-                    prototypes. I believe the best products come from rigorous testing and deep collaboration.</p>
+                <section class="page-header">
+                    <h1>About</h1>
+                    <p>Product designer who builds with data, experiments & prototypes</p>
+                </section>
+                <p class="tagline">I believe the best products come from rigorous testing and deep collaboration.
+                    Currently Lead Designer at Sitetracker, previously at Gojek and Wayground.</p>
             </div>
             <div class="about-hero-image">
-                <img src="images/profile.png" alt="Chandra Ramanujan" id="profileImage">
+                <div class="polaroid">
+                    <img src="images/profile.png" alt="Chandra Ramanujan" id="profileImage">
+                    <span class="polaroid-caption">me @ work</span>
+                </div>
             </div>
         </section>
 
@@ -459,41 +495,15 @@
             </div>
         </section>
 
-        <!-- Outside Work + Quick Facts -->
-        <section class="about-details">
-            <div class="outside-work">
-                <h2>Outside of Work</h2>
-                <p>When I'm not designing, you can find me exploring new places, trying out new recipes, or diving into
-                    a good book. I'm endlessly curious about how things work, whether that's a complex system or a
-                    perfect risotto.</p>
-                <div class="interests-list">
-                    <span class="interest-tag">Travel</span>
-                    <span class="interest-tag">Cooking</span>
-                    <span class="interest-tag">Reading</span>
-                    <span class="interest-tag">Side Projects</span>
-                    <span class="interest-tag">Data Viz</span>
-                </div>
-            </div>
-            <div class="quick-facts">
-                <h2>Quick Facts</h2>
-                <ul class="quick-facts-list">
-                    <li>
-                        <span class="fact-label">Based in</span>
-                        <span class="fact-value">Bangalore, India</span>
-                    </li>
-                    <li>
-                        <span class="fact-label">Experience</span>
-                        <span class="fact-value">5+ years in product design</span>
-                    </li>
-                    <li>
-                        <span class="fact-label">Focus</span>
-                        <span class="fact-value">EdTech, Consumer Apps, Ads</span>
-                    </li>
-                    <li>
-                        <span class="fact-label">Tools</span>
-                        <span class="fact-value">Figma, Cursor, D3.js</span>
-                    </li>
-                </ul>
+        <!-- Outside Work -->
+        <section class="outside-work-section">
+            <h2>Outside of Work</h2>
+            <div class="interests-list">
+                <span class="interest-tag">Travel</span>
+                <span class="interest-tag">Cooking</span>
+                <span class="interest-tag">Reading</span>
+                <span class="interest-tag">Side Projects</span>
+                <span class="interest-tag">Data Viz</span>
             </div>
         </section>
 

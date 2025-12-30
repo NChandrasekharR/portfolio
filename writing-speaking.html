@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing & Speaking - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            background: #fff;
+            font-size: 14pt;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab:hover {
+            border-color: #B43546;
+            color: #B43546;
+        }
+
+        .filter-tab.active {
+            background: #B43546;
+            border-color: #B43546;
+            color: #fff;
+        }
+
+        /* Content items */
+        .content-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s ease;
+        }
+
+        .content-item:first-child {
+            padding-top: 0;
+        }
+
+        .content-item:last-child {
+            border-bottom: none;
+        }
+
+        .content-item:hover {
+            background: #fafafa;
+            margin: 0 -1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .content-item:hover:first-child {
+            padding-top: 1rem;
+            margin-top: -1rem;
+        }
+
+        .content-date {
+            flex-shrink: 0;
+            width: 60px;
+            font-size: 14pt;
+            font-weight: 600;
+            color: #999;
+        }
+
+        .content-details {
+            flex: 1;
+        }
+
+        .content-details h3 {
+            font-size: 18pt;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .content-details p {
+            font-size: 15pt;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-details .source {
+            font-size: 14pt;
+            color: #999;
+        }
+
+        .content-tag-wrapper {
+            flex-shrink: 0;
+        }
+
+        /* Hide items when filtered */
+        .content-item.hidden {
+            display: none;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+            display: none;
+        }
+
+        .empty-state.visible {
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 16pt;
+        }
+
+        @media (max-width: 640px) {
+            .content-item {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .content-date {
+                width: auto;
+            }
+
+            .content-tag-wrapper {
+                order: -1;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                font-size: 13pt;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing-speaking.html" class="active">Writing & Speaking</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Writing & Speaking</h1>
+            <p>Articles, talks, podcasts, and workshops on design and product</p>
+        </section>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="talk">Talks</button>
+            <button class="filter-tab" data-filter="workshop">Workshops</button>
+            <button class="filter-tab" data-filter="podcast">Podcasts</button>
+            <button class="filter-tab" data-filter="article">Articles</button>
+        </div>
+
+        <section class="content-list">
+            <a href="#" class="content-item" data-type="talk" target="_blank" rel="noopener">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>Sewing With Code</h3>
+                    <p>Exploring generative art through code-based textile patterns</p>
+                    <span class="source">Processing Community Day 2021</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="talk" target="_blank" rel="noopener">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>How to Build Side Projects inside Your Organisation</h3>
+                    <p>Strategies for nurturing innovation within organizational constraints</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="podcast" target="_blank" rel="noopener">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Interview on #BeyondTheObvious Newsletter</h3>
+                    <p>Insights on design thinking and creative problem-solving</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Interview</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="podcast" target="_blank" rel="noopener">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Podcast on Design Fiction</h3>
+                    <p>Exploring speculative design and future-oriented thinking</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Podcast</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="talk" target="_blank" rel="noopener">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Platform Workers Design Toolkit</h3>
+                    <p>Designing for platform workers in the gig economy</p>
+                    <span class="source">India HCI Conference</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="workshop" target="_blank" rel="noopener">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Sketching for the User Experience</h3>
+                    <p>Techniques for rapid ideation and visual communication in UX</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Webinar</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="workshop" target="_blank" rel="noopener">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Storyboarding for Product and Service Design</h3>
+                    <p>Using narrative techniques to design better products and services</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Webinar</span>
+                </div>
+            </a>
+
+            <a href="#" class="content-item" data-type="workshop" target="_blank" rel="noopener">
+                <span class="content-date">2019</span>
+                <div class="content-details">
+                    <h3>A Brief Introduction to Design Fiction</h3>
+                    <p>Workshop exploring speculative design methods</p>
+                    <span class="source">Numa Bengaluru</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Workshop</span>
+                </div>
+            </a>
+        </section>
+
+        <div class="empty-state">
+            <p>No items in this category yet.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const contentItems = document.querySelectorAll('.content-item');
+        const emptyState = document.querySelector('.empty-state');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+                let visibleCount = 0;
+
+                // Filter items
+                contentItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                // Show/hide empty state
+                if (visibleCount === 0) {
+                    emptyState.classList.add('visible');
+                } else {
+                    emptyState.classList.remove('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
