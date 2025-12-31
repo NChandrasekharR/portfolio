@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Writing & Speaking - Chandra Ramanujan</title>
+    <title>Writing - Chandra Ramanujan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
             border: 1px solid #eee;
             border-radius: 20px;
             background: #fff;
+            font-family: 'Rethink Sans', sans-serif;
             font-size: 14pt;
             font-weight: 500;
             color: #666;
@@ -102,6 +103,26 @@
         .content-details .source {
             font-size: 14pt;
             color: #999;
+            display: block;
+        }
+
+        .content-details .source a {
+            color: #B43546;
+            text-decoration: none;
+        }
+
+        .content-details .source a:hover {
+            color: #8B2838;
+            text-decoration: underline;
+        }
+
+        .content-details h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .content-details h3 a:hover {
+            color: #B43546;
         }
 
         .content-tag-wrapper {
@@ -165,16 +186,16 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="work.html">Work</a></li>
             <li><a href="side-projects.html">Side Projects</a></li>
-            <li><a href="writing-speaking.html" class="active">Writing & Speaking</a></li>
+            <li><a href="writing-speaking.html" class="active">Writing</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="resume.html">Resume</a></li>
+            <li><a href="https://drive.google.com/file/d/1lJdautAZvmx8DzGwb9-IBwlpT_G-Kq8b/view" target="_blank" rel="noopener">Resume</a></li>
         </ul>
     </nav>
 
     <main class="container">
         <section class="page-header">
-            <h1>Writing & Speaking</h1>
-            <p>Articles, talks, podcasts, and workshops on design and product</p>
+            <h1>Writing</h1>
+            <p>Articles, talks, and more</p>
         </section>
 
         <div class="filter-tabs">
@@ -183,9 +204,131 @@
             <button class="filter-tab" data-filter="workshop">Workshops</button>
             <button class="filter-tab" data-filter="podcast">Podcasts</button>
             <button class="filter-tab" data-filter="article">Articles</button>
+            <button class="filter-tab" data-filter="policy">Policy</button>
+            <button class="filter-tab" data-filter="press">Press</button>
         </div>
 
         <section class="content-list">
+            <a href="https://www.thehindubusinessline.com/books/apples-walled-garden-and-the-battle-to-break-it/article70402572.ece" class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>Apple's walled garden and the battle to break it</h3>
+                    <p>Book review of "iWar" by Tim Higgins</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/an-ironical-warning-against-fragmentation/article70269944.ece" class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>An ironical warning against fragmentation</h3>
+                    <p>Book review of "How to Save the Internet" by Nick Clegg</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/reviews/the-thinking-machine-jenseng-huang-nvidia-and-the-worlds-most-coveted-microchip/article69563812.ece" class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>The Thinking Machine</h3>
+                    <p>Book review of "The Thinking Machine" by Stephen DeWitt</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.hindustantimes.com/cities/bengaluru-news/no-kannada-in-bangalore-one-centers-man-shares-an-ordeal-of-a-daily-wage-worker-who-wants-to-update-aadhar-101734685586039.html" class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>No Kannada in Bangalore One Centers</h3>
+                    <p>Highlighted language accessibility issues for daily wage workers; Kannada forms later added to Aadhaar centers</p>
+                    <span class="source">Hindustan Times</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://www.outlookbusiness.com/strategy/feature/hoodwinked-in-app-verse-7023" class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>Hoodwinked in App-Verse</h3>
+                    <p>Featured in article on dark patterns and deceptive practices in Indian apps</p>
+                    <span class="source">Outlook Business</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://economictimes.indiatimes.com/tech/technology/app-anxiety-why-users-are-extra-cautious-while-using-apps-meant-for-daily-convenience/articleshow/111889638.cms" class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>How Consumers Are Turning Cautious as Internet Companies Use Dark Patterns</h3>
+                    <p>Quoted on dark patterns and deceptive design in everyday apps</p>
+                    <span class="source">Economic Times</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://www.ndtv.com/feature/bengaluru-man-slams-urban-company-for-dark-subscription-tactics-app-designer-responds-5346556" class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>Bengaluru Man Criticises Urban Company For 'Dark Subscription' Tactics</h3>
+                    <p>Featured for advocacy against dark patterns in Indian consumer apps</p>
+                    <span class="source">NDTV</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://creators.spotify.com/pod/profile/kaushik-murali/episodes/26--Breaking-Boundaries-in-Design-From-Copywriting-to-Product-Design---Chandra-from-Gojek-e1vma0a" class="content-item" data-type="podcast" target="_blank" rel="noopener">
+                <span class="content-date">2023</span>
+                <div class="content-details">
+                    <h3>Breaking Boundaries in Design: From Copywriting to Product Design</h3>
+                    <p>Discussion on my design journey, building Pause at Obvious, and advice for new designers</p>
+                    <span class="source">Product Stories Podcast</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Podcast</span>
+                </div>
+            </a>
+
+            <div class="content-item" data-type="policy">
+                <span class="content-date">2023</span>
+                <div class="content-details">
+                    <h3><a href="https://captnemo.in/public/dark-patterns.pdf" target="_blank" rel="noopener">Recommendations on Draft Dark Patterns Guidelines</a></h3>
+                    <p>Policy submission documenting deceptive patterns in Indian startups and proposing regulatory improvements</p>
+                    <span class="source">Ministry of Consumer Affairs, India · with <a href="https://captnemo.in/" target="_blank" rel="noopener">Abhay</a> & <a href="https://tatooine.club/@hashfyre" target="_blank" rel="noopener">Joy</a></span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-policy">Policy</span>
+                </div>
+            </div>
+
+            <a href="https://www.gojek.io/blog/how-a-job-ads-language-influences-diversity-a-case-study" class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2022</span>
+                <div class="content-details">
+                    <h3>How A Job Ad's Language Influences Diversity</h3>
+                    <p>Case study on gendered language in job postings and its impact on applicant diversity</p>
+                    <span class="source">Gojek Blog</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
             <a href="#" class="content-item" data-type="talk" target="_blank" rel="noopener">
                 <span class="content-date">2021</span>
                 <div class="content-details">
