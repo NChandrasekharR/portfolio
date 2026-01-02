@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANDRA — ENTER THE DESERT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Rethink+Sans:wght@400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand: #E8DCC4;
+            --sand-light: #F5EDE0;
+            --sand-dark: #C4B49A;
+            --ochre: #C17F59;
+            --rust: #8B4513;
+            --burgundy: #B43546;
+            --midnight: #1A1A2E;
+            --deep-blue: #16213E;
+            --gold: #D4A84B;
+            --black: #0D0D0D;
+        }
+
+        @font-face {
+            font-family: 'Desert';
+            src: local('Instrument Serif');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        body {
+            font-family: 'Rethink Sans', sans-serif;
+            background: var(--black);
+            color: var(--sand);
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Scanlines overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.3;
+        }
+
+        /* Desert sand particles */
+        .sand-particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: var(--sand);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: sandFall linear infinite;
+        }
+
+        @keyframes sandFall {
+            0% {
+                opacity: 0;
+                transform: translateY(-10vh) translateX(0);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) translateX(50px);
+            }
+        }
+
+        /* Navigation - brutalist style */
+        .nav-brutal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 100vh;
+            background: var(--midnight);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
+        }
+
+        .nav-brutal a {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--sand-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .nav-brutal a:hover {
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+        }
+
+        /* Time display */
+        .time-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--sand-dark);
+            letter-spacing: 0.2em;
+            z-index: 1000;
+        }
+
+        /* Coordinates */
+        .coordinates {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--ochre);
+            letter-spacing: 0.1em;
+            z-index: 1000;
+            text-align: right;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 60px;
+        }
+
+        /* Opening scene - the desert */
+        .scene-desert {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(
+                180deg,
+                var(--black) 0%,
+                var(--midnight) 30%,
+                var(--deep-blue) 60%,
+                var(--ochre) 85%,
+                var(--sand-dark) 100%
+            );
+        }
+
+        /* Desert dunes */
+        .dune {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 40vh;
+            background: var(--sand);
+            border-radius: 100% 100% 0 0;
+            opacity: 0.1;
+        }
+
+        .dune:nth-child(1) {
+            left: -50%;
+            animation: duneDrift 30s ease-in-out infinite;
+        }
+
+        .dune:nth-child(2) {
+            left: -20%;
+            height: 35vh;
+            opacity: 0.15;
+            animation: duneDrift 25s ease-in-out infinite reverse;
+        }
+
+        .dune:nth-child(3) {
+            left: 10%;
+            height: 30vh;
+            opacity: 0.2;
+            animation: duneDrift 35s ease-in-out infinite;
+        }
+
+        @keyframes duneDrift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5%); }
+        }
+
+        /* Central identity */
+        .identity {
+            text-align: center;
+            z-index: 10;
+            mix-blend-mode: difference;
+        }
+
+        .identity-pre {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--ochre);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        .identity-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--sand);
+            line-height: 0.9;
+            opacity: 0;
+            animation: revealName 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.8s;
+        }
+
+        .identity-name span {
+            display: inline-block;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .identity-name span:hover {
+            color: var(--gold);
+            transform: translateY(-10px) rotate(-5deg);
+            text-shadow: 0 20px 40px rgba(212, 168, 75, 0.3);
+        }
+
+        .identity-sub {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--ochre);
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1.5s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes revealName {
+            0% {
+                opacity: 0;
+                transform: translateY(100px);
+                filter: blur(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Scroll prompt */
+        .scroll-prompt {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: var(--sand-dark);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 2s, pulse 2s ease-in-out infinite 3s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Portrait section - the oasis */
+        .scene-portrait {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            background: var(--midnight);
+        }
+
+        .portrait-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .portrait-frame {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        /* Orbiting elements around portrait */
+        .orbit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(212, 168, 75, 0.2);
+            border-radius: 50%;
+            animation: orbit 20s linear infinite;
+        }
+
+        .orbit:nth-child(2) {
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+
+        .orbit:nth-child(3) {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            animation-duration: 40s;
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        @keyframes orbit {
+            to { transform: rotate(360deg); }
+        }
+
+        .portrait-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            filter: grayscale(30%) contrast(1.1);
+            transition: all 0.6s ease;
+        }
+
+        .portrait-frame:hover .portrait-image {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.05);
+        }
+
+        .portrait-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .portrait-quote {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--sand);
+            margin-bottom: 2rem;
+        }
+
+        .portrait-quote strong {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .portrait-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--sand-dark);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Work section - the journey */
+        .scene-work {
+            min-height: 100vh;
+            padding: 8rem 4rem;
+            background: linear-gradient(180deg, var(--midnight) 0%, var(--black) 100%);
+            position: relative;
+        }
+
+        .section-marker {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            color: var(--ochre);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-headline {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--sand);
+            margin-bottom: 4rem;
+        }
+
+        /* Work items - unconventional grid */
+        .work-scatter {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(4, auto);
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .work-item {
+            position: relative;
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .work-item:nth-child(1) {
+            grid-column: 1 / 6;
+            grid-row: 1 / 3;
+        }
+
+        .work-item:nth-child(2) {
+            grid-column: 7 / 13;
+            grid-row: 1 / 2;
+            margin-top: 4rem;
+        }
+
+        .work-item:nth-child(3) {
+            grid-column: 5 / 10;
+            grid-row: 3 / 4;
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px) rotate(-1deg);
+        }
+
+        .work-item-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            filter: grayscale(50%);
+            transition: filter 0.5s ease;
+        }
+
+        .work-item:hover .work-item-image {
+            filter: grayscale(0%);
+        }
+
+        .work-item-info {
+            padding: 1.5rem 0;
+        }
+
+        .work-item-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .work-item-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--sand);
+            margin-top: 0.5rem;
+        }
+
+        /* Projects section - constellation */
+        .scene-projects {
+            min-height: 100vh;
+            padding: 8rem 4rem;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Star field background */
+        .star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, var(--sand-dark), transparent),
+                radial-gradient(2px 2px at 40px 70px, var(--sand), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--gold), transparent),
+                radial-gradient(2px 2px at 130px 80px, var(--sand-dark), transparent),
+                radial-gradient(1px 1px at 160px 120px, var(--sand), transparent);
+            background-size: 200px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .projects-constellation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-node {
+            width: 200px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .project-node:nth-child(even) {
+            margin-top: 4rem;
+        }
+
+        .project-node:hover {
+            transform: scale(1.1);
+        }
+
+        .project-node-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            margin: 0 auto 1rem;
+            filter: grayscale(100%);
+            transition: all 0.4s ease;
+        }
+
+        .project-node:hover .project-node-image {
+            filter: grayscale(0%);
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        .project-node-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1rem;
+            color: var(--sand);
+        }
+
+        .project-node-desc {
+            font-size: 11px;
+            color: var(--sand-dark);
+            margin-top: 0.25rem;
+        }
+
+        /* About section - the campfire */
+        .scene-about {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 4rem;
+            background: radial-gradient(ellipse at center bottom, var(--rust) 0%, var(--midnight) 50%, var(--black) 100%);
+            position: relative;
+        }
+
+        /* Campfire glow */
+        .campfire-glow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 200px;
+            background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.3) 0%, transparent 70%);
+            animation: fireGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes fireGlow {
+            0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .about-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-headline {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--sand);
+            line-height: 1.4;
+            margin-bottom: 3rem;
+        }
+
+        .about-headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .about-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .about-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--ochre);
+            color: var(--ochre);
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .about-tag:hover {
+            background: var(--ochre);
+            color: var(--black);
+        }
+
+        /* Contact section - horizon */
+        .scene-contact {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, var(--black) 0%, var(--midnight) 50%, var(--ochre) 100%);
+            position: relative;
+        }
+
+        .contact-headline {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            color: var(--sand);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .contact-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: var(--sand);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border: 1px solid var(--sand);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--sand);
+            color: var(--black);
+        }
+
+        /* Hidden guitar strings - activated by clicking bottom left */
+        .guitar-strings {
+            position: fixed;
+            bottom: 0;
+            left: 60px;
+            width: calc(100% - 60px);
+            height: 100px;
+            display: none;
+            z-index: 999;
+            background: rgba(0,0,0,0.9);
+        }
+
+        .guitar-strings.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .string {
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--gold), var(--sand));
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .string:hover {
+            transform: scaleX(2);
+            background: var(--gold);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        .string.plucked {
+            animation: vibrate 0.5s ease;
+        }
+
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-3px); }
+            20% { transform: translateX(3px); }
+            30% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            50% { transform: translateX(-1px); }
+            60% { transform: translateX(1px); }
+        }
+
+        /* Secret tennis court - activated by double clicking */
+        .tennis-court {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 400px;
+            height: 200px;
+            background: #2D5A27;
+            border: 4px solid white;
+            z-index: 9999;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .tennis-court.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .tennis-court::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: white;
+        }
+
+        .tennis-court::after {
+            content: '🎾';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-50%, -80%); }
+        }
+
+        /* Easter egg trigger zone */
+        .egg-trigger {
+            position: fixed;
+            bottom: 0;
+            left: 60px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 998;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-brutal {
+                width: 100%;
+                height: 50px;
+                flex-direction: row;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-brutal a {
+                writing-mode: horizontal-tb;
+                font-size: 9px;
+                padding: 0 0.5rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 50px;
+            }
+
+            .scene-portrait {
+                grid-template-columns: 1fr;
+            }
+
+            .work-scatter {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .work-item:nth-child(2) {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .scene-desert {
+                padding: 2rem;
+            }
+
+            .identity-name {
+                font-size: 3rem;
+            }
+
+            .portrait-frame {
+                width: 250px;
+                height: 250px;
+            }
+
+            .scene-work,
+            .scene-projects,
+            .scene-about {
+                padding: 4rem 2rem;
+            }
+
+            .time-display,
+            .coordinates {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scanlines -->
+    <div class="scanlines"></div>
+
+    <!-- Sand particles - generated by JS -->
+    <div id="sandContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-brutal">
+        <a href="work.html">Work</a>
+        <a href="side-projects.html">Projects</a>
+        <a href="writing-speaking.html">Writing</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <!-- Time display -->
+    <div class="time-display" id="timeDisplay">00:00:00</div>
+
+    <!-- Coordinates -->
+    <div class="coordinates" id="coordinates">
+        LAT 23.4162° N<br>
+        LON 25.6628° E<br>
+        <span style="color: var(--gold);">SAHARA</span>
+    </div>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <!-- Scene 1: The Desert -->
+        <section class="scene-desert">
+            <div class="dune"></div>
+            <div class="dune"></div>
+            <div class="dune"></div>
+
+            <div class="identity">
+                <p class="identity-pre">Product Designer // Data + Soul</p>
+                <h1 class="identity-name">
+                    <span>C</span><span>H</span><span>A</span><span>N</span><span>D</span><span>R</span><span>A</span>
+                </h1>
+                <p class="identity-sub">Building products the nerdy way</p>
+            </div>
+
+            <div class="scroll-prompt">Scroll to journey</div>
+        </section>
+
+        <!-- Scene 2: The Portrait -->
+        <section class="scene-portrait">
+            <div class="portrait-visual">
+                <div class="portrait-frame">
+                    <div class="orbit"><span class="orbit-dot"></span></div>
+                    <div class="orbit"><span class="orbit-dot"></span></div>
+                    <div class="orbit"><span class="orbit-dot"></span></div>
+                    <img src="images/profile.png" alt="Chandra" class="portrait-image" id="portraitImg">
+                </div>
+            </div>
+            <div class="portrait-text">
+                <blockquote class="portrait-quote">
+                    "I believe in <strong>evidence over intuition</strong>—but also know when to trust the gut. Design is jazz: you learn the rules so you can break them beautifully."
+                </blockquote>
+                <p class="portrait-meta">Designer at Gojek & Wayground</p>
+            </div>
+        </section>
+
+        <!-- Scene 3: The Work -->
+        <section class="scene-work">
+            <span class="section-marker">002 — Selected Work</span>
+            <h2 class="section-headline">The Journey</h2>
+
+            <div class="work-scatter">
+                <a href="gojek-consumer-ads.html" class="work-item">
+                    <img src="images/gojek-case-study hero.png" alt="Gojek" class="work-item-image">
+                    <div class="work-item-info">
+                        <span class="work-item-year">2021 — 2024</span>
+                        <h3 class="work-item-title">Gojek Consumer Ads</h3>
+                    </div>
+                </a>
+                <a href="wayground-enterprise.html" class="work-item">
+                    <img src="images/Wayground hero.png" alt="Wayground" class="work-item-image">
+                    <div class="work-item-info">
+                        <span class="work-item-year">2024</span>
+                        <h3 class="work-item-title">Wayground Enterprise</h3>
+                    </div>
+                </a>
+                <a href="work.html" class="work-item">
+                    <img src="images/Usage analytics hero.png" alt="Analytics" class="work-item-image">
+                    <div class="work-item-info">
+                        <span class="work-item-year">2024</span>
+                        <h3 class="work-item-title">Usage Analytics</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Scene 4: Projects Constellation -->
+        <section class="scene-projects">
+            <div class="star-field"></div>
+            <span class="section-marker">003 — Side Projects</span>
+            <h2 class="section-headline">Constellations</h2>
+
+            <div class="projects-constellation">
+                <a href="https://github.com/NChandrasekharR/wordcraft" class="project-node" target="_blank">
+                    <img src="images/Wordcraft.png" alt="Wordcraft" class="project-node-image">
+                    <h3 class="project-node-title">Wordcraft</h3>
+                    <p class="project-node-desc">Parametric writing</p>
+                </a>
+                <a href="https://github.com/NChandrasekharR/hextractor" class="project-node" target="_blank">
+                    <img src="images/Hextractor.png" alt="Hextractor" class="project-node-image">
+                    <h3 class="project-node-title">Hextractor</h3>
+                    <p class="project-node-desc">Color extraction</p>
+                </a>
+                <a href="https://github.com/NChandrasekharR/dither-me-this" class="project-node" target="_blank">
+                    <img src="images/dither-me-this.png" alt="Dither" class="project-node-image">
+                    <h3 class="project-node-title">Dither Me This</h3>
+                    <p class="project-node-desc">Win95 aesthetics</p>
+                </a>
+                <a href="https://github.com/NChandrasekharR/mimic-plugin" class="project-node" target="_blank">
+                    <img src="images/Mimic image.png" alt="Mimic" class="project-node-image">
+                    <h3 class="project-node-title">Mimic</h3>
+                    <p class="project-node-desc">Pattern learning</p>
+                </a>
+                <a href="https://github.com/NChandrasekharR/booksviz" class="project-node" target="_blank">
+                    <img src="images/booksviz.png" alt="Books" class="project-node-image">
+                    <h3 class="project-node-title">Reading Viz</h3>
+                    <p class="project-node-desc">D3 scrollytelling</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Scene 5: About / Campfire -->
+        <section class="scene-about">
+            <div class="campfire-glow"></div>
+            <div class="about-content">
+                <h2 class="about-headline">
+                    When the screens go dark, you'll find me with a <em>guitar</em> or on a <em>tennis court</em>, lost in the sounds of <em>Tinariwen</em> and <em>Françoise Hardy</em>.
+                </h2>
+                <div class="about-tags">
+                    <span class="about-tag">Data-Driven</span>
+                    <span class="about-tag">Prototyper</span>
+                    <span class="about-tag">Experimenter</span>
+                    <span class="about-tag">Guitar Player</span>
+                    <span class="about-tag">Tennis</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scene 6: Contact / Horizon -->
+        <section class="scene-contact">
+            <h2 class="contact-headline">Let's talk.</h2>
+            <div class="contact-links">
+                <a href="mailto:attnchand@gmail.com" class="contact-link">Email</a>
+                <a href="https://www.linkedin.com/in/chandrasekharn/" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/NCResq" class="contact-link" target="_blank">Twitter</a>
+                <a href="https://github.com/NChandrasekharR" class="contact-link" target="_blank">GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Hidden guitar strings easter egg -->
+    <div class="guitar-strings" id="guitarStrings">
+        <div class="string" data-note="E"></div>
+        <div class="string" data-note="A"></div>
+        <div class="string" data-note="D"></div>
+        <div class="string" data-note="G"></div>
+        <div class="string" data-note="B"></div>
+        <div class="string" data-note="e"></div>
+    </div>
+
+    <!-- Tennis court easter egg -->
+    <div class="tennis-court" id="tennisCourt"></div>
+
+    <!-- Easter egg trigger -->
+    <div class="egg-trigger" id="eggTrigger"></div>
+
+    <script>
+        // Time display
+        function updateTime() {
+            const now = new Date();
+            const time = now.toTimeString().split(' ')[0];
+            document.getElementById('timeDisplay').textContent = time;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Generate sand particles
+        const sandContainer = document.getElementById('sandContainer');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'sand-particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            sandContainer.appendChild(particle);
+        }
+
+        // Portrait image hover
+        const portraitImg = document.getElementById('portraitImg');
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                portraitImg.src = 'images/profile-smile.png';
+            });
+            link.addEventListener('mouseleave', () => {
+                portraitImg.src = 'images/profile.png';
+            });
+        });
+
+        // Guitar strings easter egg
+        const eggTrigger = document.getElementById('eggTrigger');
+        const guitarStrings = document.getElementById('guitarStrings');
+        let guitarVisible = false;
+
+        eggTrigger.addEventListener('click', () => {
+            guitarVisible = !guitarVisible;
+            guitarStrings.classList.toggle('active', guitarVisible);
+        });
+
+        // Guitar string sounds (visual feedback)
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const strings = document.querySelectorAll('.string');
+        const frequencies = [82.41, 110.00, 146.83, 196.00, 246.94, 329.63]; // E A D G B e
+
+        strings.forEach((string, index) => {
+            string.addEventListener('click', () => {
+                string.classList.add('plucked');
+                setTimeout(() => string.classList.remove('plucked'), 500);
+
+                // Play tone
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.frequency.value = frequencies[index];
+                oscillator.type = 'triangle';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1);
+            });
+        });
+
+        // Tennis court easter egg - double click anywhere
+        let clickCount = 0;
+        let clickTimer;
+        const tennisCourt = document.getElementById('tennisCourt');
+
+        document.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 1) {
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                }, 300);
+            } else if (clickCount === 2) {
+                clearTimeout(clickTimer);
+                clickCount = 0;
+                tennisCourt.classList.toggle('active');
+                setTimeout(() => {
+                    tennisCourt.classList.remove('active');
+                }, 3000);
+            }
+        });
+
+        // Coordinates follow scroll
+        const coordinates = document.getElementById('coordinates');
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const lat = (23.4162 + scrollPercent * 10).toFixed(4);
+            const lon = (25.6628 - scrollPercent * 15).toFixed(4);
+            coordinates.innerHTML = `LAT ${lat}° N<br>LON ${lon}° E<br><span style="color: var(--gold);">SAHARA</span>`;
+        });
+
+        // Name letter interactions
+        document.querySelectorAll('.identity-name span').forEach((letter, index) => {
+            letter.addEventListener('mouseenter', () => {
+                letter.style.transitionDelay = '0s';
+            });
+            letter.addEventListener('mouseleave', () => {
+                letter.style.transitionDelay = (index * 0.05) + 's';
+            });
+        });
+
+        // Konami code - reveals secret message
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    // Secret unlocked
+                    document.body.style.filter = 'hue-rotate(180deg)';
+                    setTimeout(() => {
+                        document.body.style.filter = 'none';
+                        alert('🎸 You found the secret! Tinariwen would be proud.');
+                    }, 500);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Type 'guitar' to activate strings
+        let typedKeys = '';
+        document.addEventListener('keypress', (e) => {
+            typedKeys += e.key.toLowerCase();
+            if (typedKeys.includes('guitar')) {
+                guitarStrings.classList.add('active');
+                guitarVisible = true;
+                typedKeys = '';
+            }
+            if (typedKeys.length > 10) {
+                typedKeys = typedKeys.slice(-6);
+            }
+        });
+    </script>
+</body>
+</html>

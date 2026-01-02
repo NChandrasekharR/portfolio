@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandra Ramanujan - Product Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #B43546;
+            --burgundy-light: #D4566A;
+            --burgundy-dark: #8B2838;
+            --cream: #FDF8F4;
+            --warm-white: #FFFBF7;
+            --gold: #C4A35A;
+            --gold-light: #E8D5A3;
+            --charcoal: #2C2C2C;
+            --soft-black: #1A1A1A;
+            --film-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rethink Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Film grain overlay for that 60s feel */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--film-grain);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Custom cursor - vinyl record */
+        .cursor-vinyl {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--burgundy);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .cursor-vinyl::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--burgundy);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-vinyl.hovering {
+            transform: scale(1.8);
+            background: rgba(180, 53, 70, 0.1);
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: scale(1.8) rotate(360deg); }
+        }
+
+        /* Navigation - floating pill style */
+        .nav-float {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm-white);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 100px;
+            padding: 12px 32px;
+            display: flex;
+            gap: 2.5rem;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-float a {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-float a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--burgundy);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-float a:hover {
+            color: var(--burgundy);
+        }
+
+        .nav-float a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Hero section - magazine editorial style */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 80px;
+            position: relative;
+        }
+
+        /* Decorative elements */
+        .hero-left::before {
+            content: '01';
+            position: absolute;
+            top: 120px;
+            left: 80px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .hero-eyebrow {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--burgundy);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--soft-black);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--burgundy);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 400px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s ease forwards 0.8s;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: var(--burgundy);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--burgundy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(180, 53, 70, 0.3);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--charcoal);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--charcoal);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-secondary:hover::after {
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        /* Hero right - profile photo */
+        .hero-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--cream) 0%, #F5EDE6 100%);
+        }
+
+        .profile-container {
+            position: relative;
+            width: 380px;
+            height: 380px;
+        }
+
+        /* Decorative rings */
+        .profile-ring {
+            position: absolute;
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+            animation: pulseRing 4s ease-in-out infinite;
+        }
+
+        .profile-ring:nth-child(1) {
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            animation-delay: 0s;
+        }
+
+        .profile-ring:nth-child(2) {
+            top: -40px;
+            left: -40px;
+            right: -40px;
+            bottom: -40px;
+            animation-delay: 0.5s;
+        }
+
+        .profile-ring:nth-child(3) {
+            top: -60px;
+            left: -60px;
+            right: -60px;
+            bottom: -60px;
+            animation-delay: 1s;
+            opacity: 0.5;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.02); }
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .profile-container:hover .profile-image {
+            transform: scale(1.05) rotate(-3deg);
+        }
+
+        /* Floating decorative elements */
+        .float-element {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--burgundy);
+            opacity: 0.6;
+            animation: floatGentle 6s ease-in-out infinite;
+        }
+
+        .float-element.el-1 {
+            top: 15%;
+            right: 10%;
+            font-size: 24px;
+        }
+
+        .float-element.el-2 {
+            bottom: 20%;
+            left: 10%;
+            font-size: 18px;
+            animation-delay: -2s;
+        }
+
+        .float-element.el-3 {
+            top: 60%;
+            right: 5%;
+            font-size: 14px;
+            animation-delay: -4s;
+        }
+
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section styling */
+        .section {
+            padding: 120px 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--soft-black);
+        }
+
+        .section-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--burgundy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .section-link:hover {
+            gap: 14px;
+        }
+
+        /* Work grid - editorial magazine layout */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+        }
+
+        .work-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--warm-white);
+            text-decoration: none;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .work-card.featured {
+            grid-row: span 2;
+        }
+
+        .work-card-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .work-card.featured .work-card-image {
+            aspect-ratio: 3/4;
+        }
+
+        .work-card:hover .work-card-image {
+            transform: scale(1.05);
+        }
+
+        .work-card-content {
+            padding: 1.5rem;
+        }
+
+        .work-card-year {
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--soft-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .work-card-desc {
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Projects section - different background */
+        .section-alt {
+            background: var(--soft-black);
+            color: var(--cream);
+        }
+
+        .section-alt .section-number {
+            color: var(--gold);
+        }
+
+        .section-alt .section-title {
+            color: var(--cream);
+        }
+
+        .section-alt .section-link {
+            color: var(--gold);
+        }
+
+        /* Projects horizontal scroll */
+        .projects-scroll {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scrollbar-width: none;
+        }
+
+        .projects-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .project-card {
+            flex: 0 0 320px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .project-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-6px);
+        }
+
+        .project-card-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.4s ease;
+        }
+
+        .project-card:hover .project-card-image {
+            filter: grayscale(0%);
+        }
+
+        .project-card-content {
+            padding: 1.25rem;
+        }
+
+        .project-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 0.35rem;
+        }
+
+        .project-card-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* About teaser */
+        .about-teaser {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--soft-black);
+        }
+
+        .about-text em {
+            font-style: italic;
+            color: var(--burgundy);
+        }
+
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .about-detail {
+            padding: 1.5rem;
+            background: var(--warm-white);
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-detail-icon {
+            font-size: 24px;
+            margin-bottom: 0.75rem;
+        }
+
+        .about-detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--burgundy);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .about-detail-value {
+            font-size: 15px;
+            color: var(--charcoal);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px;
+            background: var(--cream);
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--soft-black);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: #888;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--burgundy);
+            color: var(--burgundy);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Easter egg - konami code activates */
+        .easter-egg-active .profile-image {
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Hidden music note that appears on hover */
+        .music-note {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--burgundy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 100;
+        }
+
+        .music-note.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .music-note:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 120px 40px 60px;
+            }
+
+            .hero-right {
+                padding: 60px 40px;
+            }
+
+            .profile-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .section {
+                padding: 80px 40px;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-card.featured {
+                grid-row: auto;
+            }
+
+            .about-teaser {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-float {
+                padding: 10px 20px;
+                gap: 1.5rem;
+            }
+
+            .nav-float a {
+                font-size: 12px;
+            }
+
+            .hero-left {
+                padding: 100px 20px 40px;
+            }
+
+            .hero-left::before {
+                display: none;
+            }
+
+            .hero-right {
+                padding: 40px 20px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .footer {
+                padding: 40px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cursor-vinyl {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Film grain overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Custom cursor -->
+    <div class="cursor-vinyl"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-float">
+        <a href="work.html">Work</a>
+        <a href="side-projects.html">Projects</a>
+        <a href="writing-speaking.html">Writing</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <p class="hero-eyebrow">Product Designer</p>
+            <h1 class="hero-title">
+                I'm Chandra.<br>
+                I design with<br>
+                <em>data & soul.</em>
+            </h1>
+            <p class="hero-subtitle">
+                Building products the nerdy way: with experiments, prototypes, and a guitar break or two.
+            </p>
+            <div class="hero-cta">
+                <a href="work.html" class="btn-primary">
+                    View My Work
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="about.html" class="btn-secondary">More about me</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="profile-container">
+                <div class="profile-ring"></div>
+                <div class="profile-ring"></div>
+                <div class="profile-ring"></div>
+                <img src="images/profile.png" alt="Chandra Ramanujan" class="profile-image" id="profileImg">
+            </div>
+            <span class="float-element el-1">data</span>
+            <span class="float-element el-2">experiments</span>
+            <span class="float-element el-3">prototypes</span>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section class="section">
+        <div class="section-header">
+            <div>
+                <span class="section-number">02</span>
+                <h2 class="section-title">Selected Work</h2>
+            </div>
+            <a href="work.html" class="section-link">
+                View all work
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="work-grid">
+            <a href="gojek-consumer-ads.html" class="work-card featured">
+                <img src="images/gojek-case-study hero.png" alt="Gojek Consumer Ads" class="work-card-image">
+                <div class="work-card-content">
+                    <span class="work-card-year">2021 — 2024</span>
+                    <h3 class="work-card-title">Building Gojek Consumer Ads</h3>
+                    <p class="work-card-desc">Ads platform across the super-app ecosystem</p>
+                </div>
+            </a>
+            <a href="wayground-enterprise.html" class="work-card">
+                <img src="images/Wayground hero.png" alt="Wayground Enterprise" class="work-card-image">
+                <div class="work-card-content">
+                    <span class="work-card-year">2024</span>
+                    <h3 class="work-card-title">Wayground Enterprise</h3>
+                    <p class="work-card-desc">Content moderation & analytics</p>
+                </div>
+            </a>
+            <a href="work.html" class="work-card">
+                <img src="images/Masthead Hero.png" alt="Masthead Ads" class="work-card-image">
+                <div class="work-card-content">
+                    <span class="work-card-year">2023</span>
+                    <h3 class="work-card-title">Masthead Ads</h3>
+                    <p class="work-card-desc">Premium placement system</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-alt">
+        <div class="section-header">
+            <div>
+                <span class="section-number">03</span>
+                <h2 class="section-title">Side Projects</h2>
+            </div>
+            <a href="side-projects.html" class="section-link">
+                View all projects
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="projects-scroll">
+            <a href="https://github.com/NChandrasekharR/wordcraft" class="project-card" target="_blank">
+                <img src="images/Wordcraft.png" alt="Wordcraft" class="project-card-image">
+                <div class="project-card-content">
+                    <h3 class="project-card-title">Wordcraft</h3>
+                    <p class="project-card-desc">AI-powered parametric writing studio</p>
+                </div>
+            </a>
+            <a href="https://github.com/NChandrasekharR/hextractor" class="project-card" target="_blank">
+                <img src="images/Hextractor.png" alt="Hextractor" class="project-card-image">
+                <div class="project-card-content">
+                    <h3 class="project-card-title">Hextractor</h3>
+                    <p class="project-card-desc">Figma plugin for color extraction</p>
+                </div>
+            </a>
+            <a href="https://github.com/NChandrasekharR/dither-me-this" class="project-card" target="_blank">
+                <img src="images/dither-me-this.png" alt="Dither Me This" class="project-card-image">
+                <div class="project-card-content">
+                    <h3 class="project-card-title">Dither Me This</h3>
+                    <p class="project-card-desc">Windows 95-themed image dithering</p>
+                </div>
+            </a>
+            <a href="https://github.com/NChandrasekharR/booksviz" class="project-card" target="_blank">
+                <img src="images/booksviz.png" alt="Goodreads Dataviz" class="project-card-image">
+                <div class="project-card-content">
+                    <h3 class="project-card-title">Reading Habits Dataviz</h3>
+                    <p class="project-card-desc">D3.js scrollytelling experience</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Teaser -->
+    <section class="section">
+        <div class="section-header">
+            <div>
+                <span class="section-number">04</span>
+                <h2 class="section-title">A Bit About Me</h2>
+            </div>
+        </div>
+        <div class="about-teaser">
+            <p class="about-text">
+                I'm a designer who believes in <em>evidence over intuition</em>—but also knows when to trust the gut. When I'm not pushing pixels, I'm playing tennis or getting lost in <em>1970s Sahara blues-rock.</em>
+            </p>
+            <div class="about-details">
+                <div class="about-detail">
+                    <div class="about-detail-icon">🎸</div>
+                    <div class="about-detail-label">After Hours</div>
+                    <div class="about-detail-value">Guitar & Tennis</div>
+                </div>
+                <div class="about-detail">
+                    <div class="about-detail-icon">🎵</div>
+                    <div class="about-detail-label">Currently Playing</div>
+                    <div class="about-detail-value">Tinariwen, Françoise Hardy</div>
+                </div>
+                <div class="about-detail">
+                    <div class="about-detail-icon">📍</div>
+                    <div class="about-detail-label">Based In</div>
+                    <div class="about-detail-value">Building cool stuff</div>
+                </div>
+                <div class="about-detail">
+                    <div class="about-detail-icon">💼</div>
+                    <div class="about-detail-label">Experience</div>
+                    <div class="about-detail-value">Gojek, Wayground</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Chandra Ramanujan</div>
+                <p class="footer-tagline">Product Designer crafting experiences with data, experiments & prototypes.</p>
+            </div>
+            <div class="footer-links">
+                <a href="mailto:attnchand@gmail.com">Email</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/chandrasekharn/" class="social-link" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/NCResq" class="social-link" target="_blank" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://dribbble.com/NCResq/shots" class="social-link" target="_blank" aria-label="Dribbble">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/NChandrasekharR" class="social-link" target="_blank" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden music button easter egg -->
+    <div class="music-note" id="musicNote">🎵</div>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor-vinyl');
+        let cursorX = 0, cursorY = 0;
+        let targetX = 0, targetY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (targetX - cursorX) * 0.15;
+            cursorY += (targetY - cursorY) * 0.15;
+            cursor.style.left = cursorX - 12 + 'px';
+            cursor.style.top = cursorY - 12 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover states
+        const hoverElements = document.querySelectorAll('a, button, .work-card, .project-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        // Profile image interactions
+        const profileImg = document.getElementById('profileImg');
+        const allLinks = document.querySelectorAll('a');
+
+        allLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                profileImg.src = 'images/profile-smile.png';
+            });
+            link.addEventListener('mouseleave', () => {
+                profileImg.src = 'images/profile.png';
+            });
+        });
+
+        // Music note easter egg - appears after scrolling
+        const musicNote = document.getElementById('musicNote');
+        let scrollTimeout;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                musicNote.classList.add('visible');
+            }
+        });
+
+        // Click music note for surprise
+        let clickCount = 0;
+        musicNote.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount >= 3) {
+                document.body.classList.toggle('easter-egg-active');
+                musicNote.textContent = document.body.classList.contains('easter-egg-active') ? '🎸' : '🎵';
+            }
+        });
+
+        // Konami code easter egg
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.classList.add('easter-egg-active');
+                    musicNote.classList.add('visible');
+                    musicNote.textContent = '🎸';
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
+</body>
+</html>
