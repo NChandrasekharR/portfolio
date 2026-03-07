@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+
+# Orphan/experimental pages
+writing.html
+talks-workshops.html
+in-the-news.html
+case-study-sample.html
+bento-home.html
+home-experimental.html
+home-personality.html
+home-poc-awwwards.html
+home-poc-inline-illustrations.html
+home-poc-v2-minimal.html
+hybrid-2025/
+wayground-enterprise-hybrid.html
+wayground-enterprise-2025.html
+gojek-consumer-ads-hybrid.html
+claude.md
