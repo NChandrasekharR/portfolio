@@ -754,22 +754,21 @@
             });
         });
 
-        // Profile image hover interaction (matching home page)
+        // Profile image hover interaction - only if profileImage exists on the page
         const profileImage = document.getElementById('profileImage');
-        const allLinks = document.querySelectorAll('a');
+        if (profileImage) {
+            const smileImg = new Image();
+            smileImg.src = 'images/profile-smile.png';
 
-        // Preload smile image
-        const smileImg = new Image();
-        smileImg.src = 'images/profile-smile.png';
-
-        allLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                profileImage.src = 'images/profile-smile.png';
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    profileImage.src = 'images/profile-smile.png';
+                });
+                link.addEventListener('mouseleave', () => {
+                    profileImage.src = 'images/profile.png';
+                });
             });
-            link.addEventListener('mouseleave', () => {
-                profileImage.src = 'images/profile.png';
-            });
-        });
+        }
 
         // Polaroid z-index logic
         // When fanned out: sticky z-index applies to all
