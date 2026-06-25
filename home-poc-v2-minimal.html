@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chandra Ramanujan - Product Designer</title>
-    <meta name="description" content="Product designer who builds with data, experiments & prototypes. Currently at Sitetracker, previously at Wayground and Gojek.">
+    <meta name="description" content="Product designer who builds with data, experiments & prototypes. Currently at Wayground, previously at Gojek.">
     <link rel="icon" type="image/png" href="images/profile.png">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Chandra Ramanujan - Product Designer">
-    <meta property="og:description" content="Product designer who builds with data, experiments & prototypes. Currently at Sitetracker, previously at Wayground and Gojek.">
+    <meta property="og:description" content="Product designer who builds with data, experiments & prototypes. Currently at Wayground, previously at Gojek.">
     <meta property="og:image" content="images/profile.png">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Chandra Ramanujan - Product Designer">
-    <meta name="twitter:description" content="Product designer who builds with data, experiments & prototypes. Currently at Sitetracker.">
+    <meta name="twitter:description" content="Product designer who builds with data, experiments & prototypes.">
     <meta name="twitter:image" content="images/profile.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,43 +27,6 @@
         /* Optimized for 1440px MacBooks */
         .container {
             max-width: 1400px;
-            position: relative;
-            z-index: 1;
-        }
-
-        body {
-            position: relative;
-        }
-
-        /* ===== Pixelised gradient backdrop ===== */
-        #pixelWrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        #pixelCanvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-            image-rendering: pixelated;
-        }
-
-        /* ===== Transparent nav so the pixel backdrop reads through ===== */
-        .main-nav {
-            background-color: transparent;
-            -webkit-backdrop-filter: none;
-            backdrop-filter: none;
-            border-bottom: none;
-        }
-
-        .site-footer {
-            position: relative;
-            z-index: 1;
         }
 
         .intro h1 {
@@ -101,19 +64,10 @@
             transform: scale(1.1) rotate(-5deg);
         }
 
-        /* Hero entrance */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-up {
-            animation: fadeUp 0.7s ease-out both;
-        }
-
         /* Selected Work Section */
         .selected-work {
             padding: 3rem 0;
+            border-top: 1px solid #eee;
         }
 
         .section-header {
@@ -144,30 +98,10 @@
             color: #8B2838;
         }
 
-        /* Frosted work cards (the "touch of polish") */
-        .work-item {
-            background: rgba(255, 255, 255, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            border-radius: 14px;
-            padding: 14px;
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-        }
-
-        .work-item:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.72);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
-        }
-
-        .work-item .work-image {
-            border-radius: 10px;
-        }
-
         /* Connect Section */
         .connect-section {
             padding: 3rem 0;
+            border-top: 1px solid #eee;
         }
 
         .connect-section h2 {
@@ -251,9 +185,6 @@
     </style>
 </head>
 <body>
-    <!-- Pixelised gradient backdrop -->
-    <div id="pixelWrap" aria-hidden="true"><canvas id="pixelCanvas"></canvas></div>
-
     <nav class="main-nav">
         <button class="hamburger" aria-label="Toggle menu">
             <span></span>
@@ -265,14 +196,13 @@
             <li><a href="work.html" id="workLink">Work</a></li>
             <li><a href="side-projects.html" id="sideProjectsLink">Side Projects</a></li>
             <li><a href="writing-speaking.html" id="writingLink">Writing</a></li>
-            <li><a href="talks-workshops.html" id="talksLink">Talks</a></li>
             <li><a href="about.html" id="aboutLink">About</a></li>
             <li><a href="https://drive.google.com/file/d/1lJdautAZvmx8DzGwb9-IBwlpT_G-Kq8b/view" target="_blank" rel="noopener" id="resumeLink">Resume</a></li>
         </ul>
     </nav>
 
     <main class="container">
-        <div class="home-layout fade-up">
+        <div class="home-layout">
             <div class="home-content">
                 <section class="intro">
                     <h1>Hi, I'm Chandra.<br>I design with data <img src="images/home-experiment.png" alt="data" class="inline-icon" id="dataIcon">, experiments <img src="images/home-microscope.png" alt="experiments" class="inline-icon" id="microscopeIcon"> & prototypes <img src="images/home-prototype.png" alt="prototypes" class="inline-icon" id="prototypeIcon"></h1>
@@ -405,134 +335,7 @@
     </footer>
 
     <script>
-        // ===== Pixelised gradient backdrop =====
-        (function () {
-            const canvas = document.getElementById('pixelCanvas');
-            const wrap = document.getElementById('pixelWrap');
-            if (!canvas || !wrap) return;
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return;
-
-            // Brand-toned palette, top → bottom
-            const STOPS = [
-                { t: 0, rgb: [252, 236, 232] },   // peach
-                { t: 0.45, rgb: [235, 190, 200] }, // burgundy tint
-                { t: 0.75, rgb: [250, 240, 241] }, // near-white warm
-                { t: 1, rgb: [255, 255, 255] }     // white
-            ];
-            const CELL = 64;  // chunky retro blocks
-            const BANDS = 5;  // quantize into discrete bands
-
-            const lerp = (a, b, t) => a + (b - a) * t;
-            function colorAt(t) {
-                const tc = Math.max(0, Math.min(1, t));
-                for (let i = 1; i < STOPS.length; i++) {
-                    if (tc <= STOPS[i].t) {
-                        const a = STOPS[i - 1], b = STOPS[i];
-                        const lt = (tc - a.t) / (b.t - a.t);
-                        return [lerp(a.rgb[0], b.rgb[0], lt), lerp(a.rgb[1], b.rgb[1], lt), lerp(a.rgb[2], b.rgb[2], lt)];
-                    }
-                }
-                return STOPS[STOPS.length - 1].rgb;
-            }
-            function hash(x, y) {
-                let h = (x * 374761393 + y * 668265263) | 0;
-                h = (h ^ (h >> 13)) * 1274126177;
-                return ((h ^ (h >> 16)) >>> 0) / 4294967295;
-            }
-
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const canHover = window.matchMedia('(hover: hover)').matches;
-            const DARK_T = 0.45;
-
-            let w = 0, h = 0, cols = 0, rows = 0;
-            let phase = 0;                 // slow ambient drift
-            let mtx = 0, mty = 0;          // mouse target offset (-0.5..0.5 from centre)
-            let mex = 0, mey = 0;          // eased mouse offset that the field leans toward
-
-            function resize() {
-                w = document.documentElement.clientWidth;
-                h = document.documentElement.scrollHeight;
-                wrap.style.height = h + 'px';
-                canvas.width = w;
-                canvas.height = h;
-                cols = Math.ceil(w / CELL);
-                rows = Math.ceil(h / CELL);
-            }
-
-            function draw() {
-                // a gentle lean toward the cursor — kept very small for good taste
-                const ox = mex * 0.08;
-                const oy = mey * 0.08;
-                // breathing envelope: motion gently swells and stills, like an inhale/exhale
-                const breath = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(phase * 0.6));
-                for (let cy = 0; cy < rows; cy++) {
-                    for (let cx = 0; cx < cols; cx++) {
-                        const fx = (cx * CELL) / w;
-                        const fy = (cy * CELL) / h;        // raw vertical (0 = top)
-                        const nx = 1 - fx + ox;            // color gradient flipped + mouse lean
-                        const ny = 1 - fy + oy;            // color gradient flipped + mouse lean
-                        const topW = Math.max(0, 1 - fy * 2.2); // extra interest, weighted to the top
-                        // animated drift: two slow waves, gently swelling with the breath
-                        let t = nx * 0.55 + ny * 0.55
-                            + Math.sin(cx * 0.2 + cy * 0.14 + phase) * 0.032 * breath
-                            + Math.cos(cx * 0.1 - cy * 0.18 + phase * 0.7) * 0.02 * breath;
-                        t += (hash(cx, cy) - 0.5) * 0.12;       // base dither on band edges
-                        t += (hash(cx * 3 + 7, cy * 5 + 1) - 0.5) * 0.22 * topW; // extra scatter up top
-                        t = Math.round(t * BANDS) / BANDS;      // quantize into retro bands
-                        // Step one band toward the lighter end of the ramp so the
-                        // darkest burgundy band drops out (away from the deepest stop)
-                        t += (t <= DARK_T ? -1 : 1) / BANDS;
-                        t = Math.max(0, Math.min(1, t));
-                        const c = colorAt(t);
-                        // Opacity split from colour: keep density strongest at the top
-                        let alpha = Math.max(0, 0.9 - fy * 0.8);
-                        if (topW > 0 && hash(cx * 11 + 2, cy * 13 + 5) > 0.86) {
-                            alpha = Math.min(1, alpha + 0.18 * topW); // sprinkle a few accent pixels
-                        }
-                        ctx.fillStyle = 'rgba(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ',' + alpha.toFixed(3) + ')';
-                        ctx.fillRect(cx * CELL, cy * CELL, CELL, CELL);
-                    }
-                }
-            }
-
-            // ----- Animation loop (~30fps, motion-safe) -----
-            let last = 0;
-            function frame(now) {
-                if (now - last >= 1000 / 30) {
-                    last = now;
-                    phase += 0.01;                  // slow ambient drift
-                    mex += (mtx - mex) * 0.05;       // ease the field toward the cursor
-                    mey += (mty - mey) * 0.05;
-                    draw();
-                }
-                requestAnimationFrame(frame);
-            }
-
-            resize();
-            if (reduceMotion) {
-                draw();                              // static for reduced-motion users
-            } else {
-                requestAnimationFrame(frame);
-                if (canHover) {
-                    window.addEventListener('mousemove', (e) => {
-                        mtx = e.clientX / window.innerWidth - 0.5;
-                        mty = e.clientY / window.innerHeight - 0.5;
-                    });
-                    window.addEventListener('mouseout', (e) => {
-                        if (!e.relatedTarget) { mtx = 0; mty = 0; } // drift back to centre when cursor leaves
-                    });
-                }
-            }
-            window.addEventListener('load', resize);
-            let resizeTimer = null;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => { resize(); if (reduceMotion) draw(); }, 120);
-            });
-        })();
-
-        // ===== Hamburger menu toggle =====
+        // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
 
@@ -541,6 +344,7 @@
             navMenu.classList.toggle('active');
         });
 
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -548,13 +352,17 @@
             });
         });
 
-        // ===== Profile-image Easter eggs (hover to swap the portrait) =====
+        // Only preload Easter egg images and attach hover listeners on devices with hover capability
         if (window.matchMedia('(hover: hover)').matches) {
             const images = ['images/profile-smile.png', 'images/profile-github.png', 'images/profile-instagram.png', 'images/lab coat.png', 'images/profile-data.png', 'images/profile-proto.png', 'images/profile-gojek.png', 'images/profile-wayground.png', 'images/profile-resume.png', 'images/profile-writing.png', 'images/profile-work.png', 'images/profile-side-projects.png', 'images/profile-about.png'];
-            images.forEach(src => { const img = new Image(); img.src = src; });
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
 
             const profileImage = document.getElementById('profileImage');
 
+            // Easter egg mappings: [selector, image]
             const easterEggs = [
                 ['.connect-section a[aria-label="GitHub"]', 'images/profile-github.png'],
                 ['.connect-section a[aria-label="Instagram"]', 'images/profile-instagram.png'],
@@ -570,6 +378,7 @@
                 ['#aboutLink', 'images/profile-about.png'],
             ];
 
+            // Attach hover listeners for each Easter egg
             easterEggs.forEach(([selector, image]) => {
                 const el = document.querySelector(selector);
                 if (el) {
@@ -578,6 +387,7 @@
                 }
             });
 
+            // All other links get the smile image
             const excludeSelectors = easterEggs.map(([s]) => s).join(',');
             document.querySelectorAll('a').forEach(link => {
                 if (!link.matches(excludeSelectors)) {

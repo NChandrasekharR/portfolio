@@ -280,6 +280,11 @@ section {
     color: #2C4A7B;
 }
 
+.tag-policy {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
 .tag-video {
     background-color: #FEE8E8;
     color: #B42C35;
