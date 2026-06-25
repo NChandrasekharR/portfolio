@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Projects - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html" class="active">Side Projects</a></li>
+            <li><a href="writing-speaking.html">Writing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://drive.google.com/file/d/1lJdautAZvmx8DzGwb9-IBwlpT_G-Kq8b/view" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Side Projects</h1>
+            <p>Things I build for fun and learning</p>
+        </section>
+
+        <section class="work-grid">
+            <a href="https://github.com/NChandrasekharR/wordcraft" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/Wordcraft.png" alt="Wordcraft - Parametric Writing Studio">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Wordcraft</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>AI-powered parametric writing studio with infinite canvas for exploring text variations</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/hextractor" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/Hextractor.png" alt="Hextractor Figma Plugin">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Hextractor</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>A Figma plugin that extracts colors from images, generates color scales, and saves them as styles</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/dither-me-this" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/dither-me-this.png" alt="Dither Me This">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Dither Me This</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>A Windows 95-themed image dithering tool that runs in your browser </p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/mimic-plugin" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/Mimic image.png" alt="Mimic Figma Plugin">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Mimic</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>A Figma/FigJam plugin that learns design patterns and applies them to multiple elements</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/morse-flashlight" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/More code.png" alt="Morse Flashlight App">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Morse Flashlight</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>Emergency morse code flashlight app for mobile devices</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/booksviz" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/booksviz.png" alt="Goodreads Reading Habits Story">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Goodreads Interactive Dataviz</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>NYT-inspired scrollytelling experience exploring how people read and rate books, built with D3.js and OpenAI Codex</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/NChandrasekharR/habit-tracker" class="work-item" target="_blank" rel="noopener">
+                <div class="work-image">
+                    <img src="images/habit tracker.png" alt="Habit Tracker">
+                </div>
+                <div class="work-content">
+                    <div class="work-meta">
+                        <h3>Habit Tracker</h3>
+                        <span class="work-date">2025</span>
+                    </div>
+                    <p>A full-year habit tracking app built with Next.js, TypeScript, and Tailwind CSS. Track daily habits, view statistics, and export data.</p>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

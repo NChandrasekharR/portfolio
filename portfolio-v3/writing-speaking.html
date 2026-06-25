@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing - Chandra Ramanujan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            background: #fff;
+            font-family: 'Rethink Sans', sans-serif;
+            font-size: 14pt;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab:hover {
+            border-color: #B43546;
+            color: #B43546;
+        }
+
+        .filter-tab.active {
+            background: #B43546;
+            border-color: #B43546;
+            color: #fff;
+        }
+
+        /* Content items */
+        .content-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s ease;
+        }
+
+        .content-item:first-child {
+            padding-top: 0;
+        }
+
+        .content-item:last-child {
+            border-bottom: none;
+        }
+
+        .content-item:hover {
+            background: #fafafa;
+            margin: 0 -1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .content-item:hover:first-child {
+            padding-top: 1rem;
+            margin-top: -1rem;
+        }
+
+        .content-date {
+            flex-shrink: 0;
+            width: 60px;
+            font-size: 14pt;
+            font-weight: 600;
+            color: #999;
+        }
+
+        .content-details {
+            flex: 1;
+        }
+
+        .content-details h3 {
+            font-size: 18pt;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .content-details p {
+            font-size: 15pt;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-details .source {
+            font-size: 14pt;
+            color: #999;
+            display: block;
+        }
+
+        .content-details .source a {
+            color: #B43546;
+            text-decoration: none;
+        }
+
+        .content-details .source a:hover {
+            color: #8B2838;
+            text-decoration: underline;
+        }
+
+        .content-details h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .content-details h3 a:hover {
+            color: #B43546;
+        }
+
+        .content-tag-wrapper {
+            flex-shrink: 0;
+        }
+
+        /* Hide items when filtered */
+        .content-item.hidden {
+            display: none;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+            display: none;
+        }
+
+        .empty-state.visible {
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 16pt;
+        }
+
+        @media (max-width: 640px) {
+            .content-item {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .content-date {
+                width: auto;
+            }
+
+            .content-tag-wrapper {
+                order: -1;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                font-size: 13pt;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing-speaking.html" class="active">Writing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://drive.google.com/file/d/1lJdautAZvmx8DzGwb9-IBwlpT_G-Kq8b/view" target="_blank"
+                    rel="noopener">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Writing</h1>
+            <p>Articles, talks, and more</p>
+        </section>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="talk">Talks</button>
+            <button class="filter-tab" data-filter="workshop">Workshops</button>
+            <button class="filter-tab" data-filter="podcast">Podcasts</button>
+            <button class="filter-tab" data-filter="article">Articles</button>
+            <button class="filter-tab" data-filter="policy">Policy</button>
+            <button class="filter-tab" data-filter="press">Press</button>
+        </div>
+
+        <section class="content-list">
+            <a href="https://www.thehindubusinessline.com/books/apples-walled-garden-and-the-battle-to-break-it/article70402572.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>Apple's walled garden and the battle to break it</h3>
+                    <p>Book review of "iWar" by Tim Higgins</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/an-ironical-warning-against-fragmentation/article70269944.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>An ironical warning against fragmentation</h3>
+                    <p>Book review of "How to Save the Internet" by Nick Clegg</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/reviews/the-thinking-machine-jenseng-huang-nvidia-and-the-worlds-most-coveted-microchip/article69563812.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>The Thinking Machine</h3>
+                    <p>Book review of "The Thinking Machine" by Stephen DeWitt</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://nchandrasekharr.github.io/vibing" class="content-item" data-type="article" target="_blank"
+                rel="noopener">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>Vibe Designing</h3>
+                    <p>2 case studies of how designers use AI to create better prototypes</p>
+                    <span class="source">Personal Blog</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Blog</span>
+                </div>
+            </a>
+
+            <div class="content-item" data-type="workshop">
+                <span class="content-date">2025</span>
+                <div class="content-details">
+                    <h3>Design QA</h3>
+                    <p>Best practices for designer-led QA</p>
+                    <span class="source">Internal workshop at Wayground · with <a
+                            href="https://www.linkedin.com/in/shanasingh/" target="_blank" rel="noopener">Shana</a> & <a
+                            href="https://www.linkedin.com/in/abhishek-vastrad-b5b0ab163/" target="_blank"
+                            rel="noopener">Abhishek</a></span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Workshop</span>
+                </div>
+            </div>
+
+            <a href="https://www.hindustantimes.com/cities/bengaluru-news/no-kannada-in-bangalore-one-centers-man-shares-an-ordeal-of-a-daily-wage-worker-who-wants-to-update-aadhar-101734685586039.html"
+                class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>No Kannada in Bangalore One Centers</h3>
+                    <p>Highlighted language accessibility issues for daily wage workers; Kannada forms later added to
+                        Aadhaar centers</p>
+                    <span class="source">Hindustan Times</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://www.outlookbusiness.com/strategy/feature/hoodwinked-in-app-verse-7023" class="content-item"
+                data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>Hoodwinked in App-Verse</h3>
+                    <p>Featured in article on dark patterns and deceptive practices in Indian apps</p>
+                    <span class="source">Outlook Business</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://economictimes.indiatimes.com/tech/technology/app-anxiety-why-users-are-extra-cautious-while-using-apps-meant-for-daily-convenience/articleshow/111889638.cms"
+                class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>How Consumers Are Turning Cautious as Internet Companies Use Dark Patterns</h3>
+                    <p>Quoted on dark patterns and deceptive design in everyday apps</p>
+                    <span class="source">Economic Times</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://www.ndtv.com/feature/bengaluru-man-slams-urban-company-for-dark-subscription-tactics-app-designer-responds-5346556"
+                class="content-item" data-type="press" target="_blank" rel="noopener">
+                <span class="content-date">2024</span>
+                <div class="content-details">
+                    <h3>Bengaluru Man Criticises Urban Company For 'Dark Subscription' Tactics</h3>
+                    <p>Featured for advocacy against dark patterns in Indian consumer apps</p>
+                    <span class="source">NDTV</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-press">Press</span>
+                </div>
+            </a>
+
+            <a href="https://creators.spotify.com/pod/profile/kaushik-murali/episodes/26--Breaking-Boundaries-in-Design-From-Copywriting-to-Product-Design---Chandra-from-Gojek-e1vma0a"
+                class="content-item" data-type="podcast" target="_blank" rel="noopener">
+                <span class="content-date">2023</span>
+                <div class="content-details">
+                    <h3>Breaking Boundaries in Design: From Copywriting to Product Design</h3>
+                    <p>Discussion on my design journey, building Pause at Obvious, and advice for new designers</p>
+                    <span class="source">Product Stories Podcast</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Podcast</span>
+                </div>
+            </a>
+
+            <div class="content-item" data-type="talk">
+                <span class="content-date">2023</span>
+                <div class="content-details">
+                    <h3>Design Automation for Large-Scale Experiments</h3>
+                    <p>Case study of running a large-scale multivariate experiment at Gojek</p>
+                    <span class="source">Presented at Gojek Design All Hands</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="policy">
+                <span class="content-date">2023</span>
+                <div class="content-details">
+                    <h3><a href="https://captnemo.in/public/dark-patterns.pdf" target="_blank"
+                            rel="noopener">Recommendations on Draft Dark Patterns Guidelines</a></h3>
+                    <p>Policy submission documenting deceptive patterns in Indian startups and proposing regulatory
+                        improvements</p>
+                    <span class="source">Ministry of Consumer Affairs, India · with <a href="https://captnemo.in/"
+                            target="_blank" rel="noopener">Abhay</a> & <a href="https://tatooine.club/@hashfyre"
+                            target="_blank" rel="noopener">Joy</a></span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-policy">Policy</span>
+                </div>
+            </div>
+
+            <a href="https://www.gojek.io/blog/how-a-job-ads-language-influences-diversity-a-case-study"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2022</span>
+                <div class="content-details">
+                    <h3>How A Job Ad's Language Influences Diversity</h3>
+                    <p>Case study on gendered language in job postings and its impact on applicant diversity</p>
+                    <span class="source">Gojek Blog</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Blog</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/author-interviews/inmachinehoodi-made-a-conscious-choice-to-have-women-of-colour-as-the-main-characterssb-divya/article65335748.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2022</span>
+                <div class="content-details">
+                    <h3>Author Interview with S.B Divya</h3>
+                    <p>Interview with S.B Divya, Author of the Science Fiction Novel "Machinehood"</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Interview</span>
+                </div>
+            </a>
+
+            <div class="content-item" data-type="talk">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>Sewing With Code</h3>
+                    <p>Exploring generative art through code-based textile patterns</p>
+                    <span class="source">Processing Community Day 2021</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </div>
+
+            <a href="https://www.thehindubusinessline.com/blink/read/auroville-an-utopian-search-for-a-better-world/article36466927.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>Auroville: An utopian search for a better world</h3>
+                    <p>Book review of "Better to Have Gone" by Akash Kapur</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/reviews/fiction/a-fantastical-philosophical-novel-that-looks-at-man-vs-machines-in-a-new-light/article37053007.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>A fantastical, philosophical novel that looks at man vs machines in a new light</h3>
+                    <p>Book review of the science fiction novel "Machinehood" by SB Divya</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <a href="https://www.thehindubusinessline.com/books/reviews/fiction/the-exciting-aftermath-of-crossing-the-wall/article37894077.ece"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>The exciting aftermath of crossing The Wall</h3>
+                    <p>Book review of the fantasy novel "The Horizon" by Gautam Bhatia</p>
+                    <span class="source">Hindu Businessline</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </a>
+
+            <div class="content-item" data-type="talk">
+                <span class="content-date">2021</span>
+                <div class="content-details">
+                    <h3>How to Build Side Projects inside Your Organisation</h3>
+                    <p>Strategies for nurturing innovation within organizational constraints</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="podcast">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Interview on #BeyondTheObvious Newsletter</h3>
+                    <p>Insights on design thinking and creative problem-solving</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Interview</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="podcast">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Podcast on Design Fiction</h3>
+                    <p>Exploring speculative design and future-oriented thinking</p>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-podcast">Podcast</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="talk">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Platform Workers Design Toolkit</h3>
+                    <p>Designing for platform workers in the gig economy</p>
+                    <span class="source">India HCI Conference</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-talk">Talk</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="article">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3><a href="http://pdcproceedings.org/Download/PDC2020Vol%203.pdf" target="_blank"
+                            rel="noopener">Cultural Probes to create new imaginaries of masculinity </a></h3>
+                    <p>Presented our research on HCI and participatory design at the PDC 20 conference</p>
+                    <span class="source">Proceedings of the 16th Participatory Design Conference 2020 - Volume 3 · with
+                        <a href="https://www.linkedin.com/in/swetabisht" target="_blank" rel="noopener">Sweta</a></span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Article</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="workshop">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Sketching for the User Experience</h3>
+                    <p>Techniques for rapid ideation and visual communication in UX</p>
+                    <span class="source">In collaboration with Smolcoach</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Webinar</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="workshop">
+                <span class="content-date">2020</span>
+                <div class="content-details">
+                    <h3>Storyboarding for Product and Service Design</h3>
+                    <p>Using narrative techniques to design better products and services</p>
+                    <span class="source">In collaboration with Smolcoach</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Webinar</span>
+                </div>
+            </div>
+
+            <div class="content-item" data-type="workshop">
+                <span class="content-date">2019</span>
+                <div class="content-details">
+                    <h3>A Brief Introduction to Design Fiction</h3>
+                    <p>Workshop exploring speculative design methods</p>
+                    <span class="source">Numa Bengaluru</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-workshop">Workshop</span>
+                </div>
+            </div>
+
+            <a href="https://medium.com/@NCResq/what-i-did-and-learnt-from-my-ten-day-sprinternship-at-uncommon-8adca93ddbf1"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2018</span>
+                <div class="content-details">
+                    <h3>What I did and learnt from my ten-day sprinternship at Uncommon</h3>
+                    <p>Internship blog at Uncommon, working on a client project for Storyweaver by Pratham Books</p>
+                    <span class="source">Medium</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Blog</span>
+                </div>
+            </a>
+
+            <a href="https://medium.com/@NCResq/do-the-benefits-of-artificial-intelligence-outweigh-the-risks-ce2876c8bfcf"
+                class="content-item" data-type="article" target="_blank" rel="noopener">
+                <span class="content-date">2018</span>
+                <div class="content-details">
+                    <h3>Do the benefits of artificial intelligence outweigh the risks?</h3>
+                    <p>Blog article on benefits and risks of AI</p>
+                    <span class="source">Medium</span>
+                </div>
+                <div class="content-tag-wrapper">
+                    <span class="content-tag tag-article">Blog</span>
+                </div>
+            </a>
+        </section>
+
+        <div class="empty-state">
+            <p>No items in this category yet.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const contentItems = document.querySelectorAll('.content-item');
+        const emptyState = document.querySelector('.empty-state');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+                let visibleCount = 0;
+
+                // Filter items
+                contentItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                // Show/hide empty state
+                if (visibleCount === 0) {
+                    emptyState.classList.add('visible');
+                } else {
+                    emptyState.classList.remove('visible');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Chandra Ramanujan</title>
+    <meta name="description" content="Product designer with 5+ years experience building with data, experiments & prototypes. Lead Designer at Sitetracker. Previously Gojek ($5M revenue impact) and Wayground.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Chandra Ramanujan",
+        "jobTitle": "Lead Designer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Sitetracker"
+        },
+        "description": "Product designer with 5+ years experience. Led design on ads products driving $5M revenue at Gojek. Shipped growth experiments with 60% CTR improvement. Built scalable design systems reducing launch time from weeks to days.",
+        "url": "https://chandraramanujan.com",
+        "email": "attnchand@gmail.com",
+        "sameAs": [
+            "https://www.linkedin.com/in/chandrasekharn/",
+            "https://twitter.com/NCResq",
+            "https://github.com/NChandrasekharR",
+            "https://dribbble.com/NCResq/shots",
+            "https://medium.com/@NCResq"
+        ],
+        "knowsAbout": [
+            "Product Design",
+            "Growth Experiments",
+            "Design Systems",
+            "Ads Products",
+            "Enterprise Software",
+            "EdTech",
+            "Data-Driven Design",
+            "Prototyping"
+        ],
+        "alumniOf": [
+            {
+                "@type": "Organization",
+                "name": "Gojek",
+                "description": "Designed and shipped ad experiences driving $5M in additional revenue. Led experiments achieving 60% increase in ad CTR."
+            },
+            {
+                "@type": "Organization",
+                "name": "Wayground",
+                "description": "Drove growth experiments delivering 5+ percentage point increase in signups. Designed enterprise features unlocking $250K+ in sales."
+            },
+            {
+                "@type": "Organization",
+                "name": "Pause (by Obvious)",
+                "description": "Led product from zero to $10K ARR while in beta."
+            }
+        ]
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Two-column layout */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .about-main {
+            /* Left column - all content flows here */
+            flex: 1;
+        }
+
+        .about-sidebar {
+            /* Right column - polaroid stack */
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            overflow: visible;
+        }
+
+        .about-main .page-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .about-main .page-header h1 {
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-main .page-header p {
+            margin-top: 0;
+        }
+
+        .about-intro p {
+            font-size: 18pt;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Polaroid Stack - 3D perspective container */
+        .polaroid-stack {
+            position: relative;
+            height: 950px;
+            width: 800px;
+            perspective: 1000px;
+        }
+
+        .polaroid {
+            position: absolute;
+            background: #fff;
+            padding: 14px 14px 50px 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.3s ease, top 0.4s ease, left 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .polaroid img {
+            width: 360px;
+            height: 360px;
+            object-fit: cover;
+            display: block;
+            background: #f0f0f0;
+            position: relative;
+            z-index: 0;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 14px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 20pt;
+            font-weight: 600;
+            color: #333;
+            font-style: normal;
+        }
+
+        /* Stack positioning - all stacked initially, pushed far right */
+        /* "me in the wild" always on top with high z-index */
+        .polaroid:nth-child(1) {
+            transform: rotate(-3deg) translateZ(0px);
+            top: 50px;
+            left: 250px;
+            z-index: 100;
+        }
+
+        .polaroid:nth-child(2) {
+            transform: rotate(2deg) translateZ(0px);
+            top: 50px;
+            left: 250px;
+            z-index: 2;
+        }
+
+        .polaroid:nth-child(3) {
+            transform: rotate(-1deg) translateZ(0px);
+            top: 50px;
+            left: 250px;
+            z-index: 1;
+        }
+
+        /* Fan out on stack hover - much wider spread */
+        .polaroid-stack:hover .polaroid:nth-child(1) {
+            transform: rotate(-10deg) translateZ(0px);
+            top: 0;
+            left: 100px;
+        }
+
+        .polaroid-stack:hover .polaroid:nth-child(2) {
+            transform: rotate(7deg) translateZ(0px);
+            top: 220px;
+            left: 400px;
+        }
+
+        .polaroid-stack:hover .polaroid:nth-child(3) {
+            transform: rotate(-5deg) translateZ(0px);
+            top: 480px;
+            left: 180px;
+        }
+
+        /* Individual polaroid hover - lift toward viewer */
+        .polaroid:hover {
+            transform: rotate(0deg) translateZ(60px) scale(1.02) !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Polaroid image container for overlay positioning */
+        .polaroid-image-container {
+            position: relative;
+            width: 360px;
+            height: 360px;
+            transform-style: flat;
+        }
+
+        /* Info button - positioned relative to .polaroid */
+        .polaroid-info-btn {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease, background 0.2s ease;
+            z-index: 100;
+        }
+
+        .polaroid:hover .polaroid-info-btn {
+            opacity: 1;
+        }
+
+        .polaroid-info-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .polaroid-info-btn svg {
+            width: 16px;
+            height: 16px;
+            color: #fff;
+            pointer-events: none;
+        }
+
+        /* Story overlay */
+        .polaroid-story {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 1;
+        }
+
+        .polaroid-story.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .polaroid-story p {
+            font-family: 'Rethink Sans', sans-serif;
+            font-size: 14pt;
+            color: #fff;
+            text-align: center;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Career Timeline */
+        .career-section {
+            margin-bottom: 3rem;
+        }
+
+        .career-section>h2 {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(to bottom, #B43546, #eee);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: #B43546;
+            border-radius: 50%;
+            transform: translateX(-4px);
+        }
+
+        .timeline-item:not(:first-child)::before {
+            background: #ddd;
+        }
+
+        .timeline-date {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #B43546;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item:not(:first-child) .timeline-date {
+            color: #999;
+        }
+
+        .timeline-title {
+            font-size: 22pt;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 16pt;
+            color: #666;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        /* How I Work Section */
+        .work-philosophy {
+            margin-bottom: 4rem;
+        }
+
+        .work-philosophy>h2 {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .philosophy-card {
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-top: 3px solid #B43546;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .philosophy-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1.25rem;
+            color: #B43546;
+            object-fit: contain;
+        }
+
+        .philosophy-card img.philosophy-icon {
+            width: 96px;
+            height: 96px;
+        }
+
+        .philosophy-card h3 {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 0.75rem;
+        }
+
+        .philosophy-card p {
+            font-size: 15pt;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Connect Section */
+        .connect-section {
+            padding: 3rem 0;
+            border-top: 1px solid #eee;
+        }
+
+        .connect-section h2 {
+            font-size: 14pt;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .connect-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .connect-text {
+            font-size: 18pt;
+            color: #666;
+            max-width: 500px;
+        }
+
+        .connect-text a {
+            color: #B43546;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .connect-text a:hover {
+            color: #8B2838;
+        }
+
+        /* Responsive */
+        @media (max-width: 1440px) {
+            /* Hide polaroid sidebar below 1440px - a nice Easter egg for large screens */
+            .about-sidebar {
+                display: none;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .connect-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-main .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-title {
+                font-size: 18pt;
+            }
+
+            .timeline-description {
+                font-size: 15pt;
+            }
+
+            .philosophy-card {
+                padding: 1.5rem;
+            }
+
+            .philosophy-card h3 {
+                font-size: 16pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="side-projects.html">Side Projects</a></li>
+            <li><a href="writing-speaking.html">Writing</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="https://drive.google.com/file/d/1lJdautAZvmx8DzGwb9-IBwlpT_G-Kq8b/view" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="about-layout">
+            <!-- Left column: all content -->
+            <div class="about-main">
+                <section class="page-header">
+                    <h1>Design decisions should be proven, not debated.</h1>
+                    <p>I prototype in code, run experiments, and let data settle arguments.</p>
+                </section>
+
+                <section class="about-intro">
+                    <p>I'm a product designer who's been building since 2017 — across consumer apps, enterprise platforms, and everything in between. I've worked at startups and large organizations, designing experiences that have driven millions of dollars in revenue across B2B and consumer products. In my spare time, I play guitar and piano, and write short stories.</p>
+                </section>
+
+                <!-- Career Timeline -->
+                <section class="career-section">
+            <h2>Work</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2025 - Present</span>
+                    <h3 class="timeline-title">Sitetracker</h3>
+                    <p class="timeline-description">Lead Designer on our asset lifecycle management platform, designing
+                        for telecom, energy, and utilities teams managing distributed infrastructure like cell towers,
+                        solar farms, and EV charging stations.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2024 - 2025</span>
+                    <h3 class="timeline-title">Wayground</h3>
+                    <p class="timeline-description">Worked on AI and enterprise products for schools and districts.
+                        Built tools that empower teachers to deliver the best experience for their students in the
+                        classroom.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2021 - 2024</span>
+                    <h3 class="timeline-title">Gojek</h3>
+                    <p class="timeline-description">Collaborated with business, product, and engineering teams to
+                        experiment and roll out new ad experiences on the Gojek consumer app. These drove $5M USD in
+                        additional revenue while keeping UX at the forefront.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2020 - 2021</span>
+                    <h3 class="timeline-title">Pause (by Obvious)</h3>
+                    <p class="timeline-description">Helped design the alpha web app for this leave management system for
+                        small businesses. Also contributed to UX research and customer operations.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2018 - 2020</span>
+                    <h3 class="timeline-title">Srishti Institute (M.Des)</h3>
+                    <p class="timeline-description">Interned multiple times at Obvious while completing my master's in design. Worked on projects for clients in the non-profit and banking sectors as part of the program.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2017 - 2018</span>
+                    <h3 class="timeline-title">Kantar</h3>
+                    <p class="timeline-description">Worked in R&D to ship robust research and insight tools for customers worldwide. Got my first taste of building products — and it drove me to join design school.</p>
+                </div>
+            </div>
+        </section>
+
+            </div><!-- end about-main -->
+
+            <!-- Right column: polaroid stack -->
+            <div class="about-sidebar">
+                <div class="polaroid-stack">
+                    <div class="polaroid">
+                        <div class="polaroid-image-container">
+                            <img src="images/About hero-web.jpeg" alt="Chandra smiling at a social event">
+                            <div class="polaroid-story">
+                                <p>Rare candid snap at a design meetup. Usually I'm the one behind the camera.</p>
+                            </div>
+                        </div>
+                        <button class="polaroid-info-btn" aria-label="Show photo story">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="12" x2="16" y2="12"></line>
+                                <line x1="3" y1="18" x2="12" y2="18"></line>
+                            </svg>
+                        </button>
+                        <span class="polaroid-caption">me in the wild</span>
+                    </div>
+                    <div class="polaroid">
+                        <div class="polaroid-image-container">
+                            <img src="images/About Design QA.jpeg" alt="Chandra presenting a Design QA session">
+                            <div class="polaroid-story">
+                                <p>Running a Design QA session at Wayground. These sessions helped catch edge cases before engineering started building.</p>
+                            </div>
+                        </div>
+                        <button class="polaroid-info-btn" aria-label="Show photo story">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="12" x2="16" y2="12"></line>
+                                <line x1="3" y1="18" x2="12" y2="18"></line>
+                            </svg>
+                        </button>
+                        <span class="polaroid-caption">presented design QA</span>
+                    </div>
+                    <div class="polaroid">
+                        <div class="polaroid-image-container">
+                            <img src="images/About microphone.png" alt="Chandra speaking with a microphone">
+                            <div class="polaroid-story">
+                                <p>Making a speaker's life difficult at a conference. Someone's gotta ask the tough questions.</p>
+                            </div>
+                        </div>
+                        <button class="polaroid-info-btn" aria-label="Show photo story">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="12" x2="16" y2="12"></line>
+                                <line x1="3" y1="18" x2="12" y2="18"></line>
+                            </svg>
+                        </button>
+                        <span class="polaroid-caption">asking tough questions</span>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end about-layout -->
+
+        <!-- How I Work - Full width -->
+        <section class="work-philosophy">
+            <h2>How I Work</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <img src="images/microscope.png" alt="Microscope" class="philosophy-icon">
+                    <h3>Experiment-first mindset</h3>
+                    <p>I form hypotheses, test them systematically, and make decisions based on evidence rather than
+                        assumptions.</p>
+                </div>
+                <div class="philosophy-card">
+                    <img src="images/handshake.png" alt="Handshake" class="philosophy-icon">
+                    <h3>Make allies & build together</h3>
+                    <p>Design doesn't happen only in Figma. I work with partners via workshops, napkin sketches, and
+                        corridor chats to get alignment.</p>
+                </div>
+                <div class="philosophy-card">
+                    <img src="images/pragmatic.png" alt="Pragmatic" class="philosophy-icon">
+                    <h3>Pragmatic design decisions</h3>
+                    <p>I spend time deeply understanding systems, tech, and business so we can build something realistic
+                        that works for everyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect Section - Full width -->
+        <section class="connect-section">
+            <h2>Let's Connect</h2>
+            <div class="connect-content">
+                <p class="connect-text">I'm always happy to chat about product design, experiments, or potential
+                    collaborations. Drop me a line at <a href="mailto:attnchand@gmail.com">attnchand@gmail.com</a></p>
+                <ul class="social-links">
+                    <li>
+                        <a href="mailto:attnchand@gmail.com" class="email-link" aria-label="Email">
+                            <svg width="20" height="20" viewBox="2 2 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/chandrasekharn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/NCResq" target="_blank" rel="noopener" aria-label="Twitter">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://dribbble.com/NCResq/shots" target="_blank" rel="noopener" aria-label="Dribbble">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/maybe_chandra" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://medium.com/@NCResq" target="_blank" rel="noopener" aria-label="Medium">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://substack.com/@NCResq" target="_blank" rel="noopener" aria-label="Substack">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.producthunt.com/@NCResq" target="_blank" rel="noopener" aria-label="Product Hunt">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.604 8.4h-3.405V12h3.405c.995 0 1.801-.806 1.801-1.801 0-.993-.805-1.799-1.801-1.799zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4h-3.405V18H7.801V6h5.804c2.319 0 4.2 1.88 4.2 4.199 0 2.321-1.881 4.201-4.201 4.201z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.figma.com/@NCResq" target="_blank" rel="noopener" aria-label="Figma">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zM8.148 24c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v4.49c0 2.476-2.014 4.49-4.588 4.49zm-.001-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02c1.665 0 3.019-1.355 3.019-3.019v-3.02H8.147zM8.148 8.981c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981H8.148zm-.001-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V1.471H8.147zM8.148 15.02c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98H8.148zm-.001-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V7.511H8.147zM15.852 15.02h-4.588V6.04h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-3.117-7.509v6.039h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.02-3.019-3.02h-3.117z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/NChandrasekharR" target="_blank" rel="noopener" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Chandra Ramanujan</p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Profile image hover interaction - only if profileImage exists on the page
+        const profileImage = document.getElementById('profileImage');
+        if (profileImage) {
+            const smileImg = new Image();
+            smileImg.src = 'images/profile-smile.png';
+
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    profileImage.src = 'images/profile-smile.png';
+                });
+                link.addEventListener('mouseleave', () => {
+                    profileImage.src = 'images/profile.png';
+                });
+            });
+        }
+
+        // Polaroid z-index logic
+        // When fanned out: sticky z-index applies to all
+        // When collapsed: "me in the wild" stays on top
+        let topZIndex = 100;
+        const polaroidStack = document.querySelector('.polaroid-stack');
+        const polaroids = document.querySelectorAll('.polaroid');
+
+        polaroids.forEach((polaroid) => {
+            polaroid.addEventListener('mouseenter', () => {
+                topZIndex++;
+                polaroid.style.zIndex = topZIndex;
+            });
+        });
+
+        // Reset z-index when leaving the stack (cards collapse back)
+        polaroidStack.addEventListener('mouseleave', () => {
+            polaroids.forEach((polaroid, index) => {
+                // Reset: first card on top, others below
+                polaroid.style.zIndex = index === 0 ? 100 : (3 - index);
+            });
+            topZIndex = 100;
+        });
+
+        // Polaroid story overlay toggle
+        document.querySelectorAll('.polaroid-info-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const polaroid = btn.closest('.polaroid');
+                const story = polaroid.querySelector('.polaroid-story');
+                if (story) {
+                    story.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close story when clicking on the overlay itself
+        document.querySelectorAll('.polaroid-story').forEach(story => {
+            story.addEventListener('click', () => {
+                story.classList.remove('active');
+            });
+        });
+
+        // Close story when pointer leaves the polaroid
+        document.querySelectorAll('.polaroid').forEach(polaroid => {
+            polaroid.addEventListener('mouseleave', () => {
+                const story = polaroid.querySelector('.polaroid-story');
+                if (story) {
+                    story.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
